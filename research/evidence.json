@@ -1,0 +1,139 @@
+{
+  "asOf": "2026-09-10",
+  "region": "GMS",
+  "patch": "v271",
+  "clientVersion": "271.1.2",
+  "sources": [
+    {
+      "id": "nexon-v271",
+      "role": "current-rule",
+      "url": "https://www.nexon.com/maplestory/news/update/44597/v-271-maple-story-x-frieren-beyond-journey-s-end-patch-notes",
+      "page_title": "MapleStory | News",
+      "capturedAt": "2026-09-09T22:10:39.506557+00:00",
+      "snapshot_sha256": "8a2b0ec7f9ccfdfc9e9acdea9b8d59c164d630d14748ffa0f14ef96d858f3d55",
+      "files": [
+        "nexon-v271.json",
+        "nexon-v271.html"
+      ]
+    },
+    {
+      "id": "nexon-v263",
+      "role": "historical-rule",
+      "url": "https://www.nexon.com/maplestory/news/update/31006/v-263-carcion-octo-fest-patch-notes",
+      "page_title": "MapleStory | News",
+      "capturedAt": "2026-09-09T22:12:07.412709+00:00",
+      "snapshot_sha256": "17bef545062dda2f909417893a26560e650bf42af4a9e662bcf9cd698d838ee2",
+      "files": [
+        "nexon-v263.json",
+        "nexon-v263.html"
+      ]
+    },
+    {
+      "id": "nexon-v246",
+      "role": "base-requirements",
+      "url": "https://www.nexon.com/maplestory/news/update/5341/v-246-new-age-6th-job-patch-notes",
+      "page_title": "MapleStory | News",
+      "capturedAt": "2026-09-09T22:13:12.818292+00:00",
+      "snapshot_sha256": "94190d022e9eabbe1f6b05aaa1d6124c3a8f3409d8cdaf465d28bafa9b7b7397",
+      "files": [
+        "nexon-v246.json",
+        "nexon-v246.html"
+      ]
+    },
+    {
+      "id": "steam-maintenance-v271",
+      "role": "release-completion",
+      "url": "https://steamcommunity.com/games/216150/announcements/detail/707782088403716435",
+      "page_title": "Steam :: MapleStory :: [Completed] Scheduled Game Update - September 9, 2026",
+      "capturedAt": "2026-09-09T22:13:29.026684+00:00",
+      "snapshot_sha256": "b81695962f69804c30d2617a16502f4ce84f5f59804ef09ad1287467f542c47e",
+      "files": [
+        "steam-maintenance-v271.json",
+        "steam-maintenance-v271.html"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "id": "faith-cap",
+      "value": 20,
+      "source": "nexon-v271",
+      "support": "direct"
+    },
+    {
+      "id": "faith-probability",
+      "formula": "n / 20",
+      "source": "nexon-v271",
+      "support": "directly derived from +5 percentage points each"
+    },
+    {
+      "id": "faith-fee",
+      "formula": "n * 1000000000",
+      "source": "nexon-v271",
+      "support": "direct"
+    },
+    {
+      "id": "life-cap",
+      "value": 10,
+      "source": "nexon-v271",
+      "support": "direct"
+    },
+    {
+      "id": "life-probability",
+      "formula": "n / 10",
+      "source": "nexon-v271",
+      "support": "directly derived"
+    },
+    {
+      "id": "life-fee",
+      "formula": "n * 500000000",
+      "source": "nexon-v271",
+      "support": "direct"
+    },
+    {
+      "id": "eligible-rings",
+      "value": [
+        "Ring of Restraint",
+        "Continuous Ring"
+      ],
+      "source": [
+        "nexon-v271",
+        "nexon-v263"
+      ],
+      "support": "derived by applying removals to prior list"
+    },
+    {
+      "id": "attempt-independence",
+      "value": true,
+      "support": "explicit model assumption"
+    },
+    {
+      "id": "all-materials-consumed",
+      "value": true,
+      "support": "explicit model assumption consistent with published costs"
+    },
+    {
+      "id": "no-pity",
+      "value": true,
+      "support": "explicit model assumption; no accumulated pity described in reviewed rules"
+    },
+    {
+      "id": "ring-maintained-on-failure",
+      "value": true,
+      "support": "explicit model assumption"
+    },
+    {
+      "id": "swap-cost",
+      "value": 50000000,
+      "source": "nexon-v271",
+      "support": "direct"
+    },
+    {
+      "id": "swap-removal",
+      "value": "November 2026 next update",
+      "source": "nexon-v271",
+      "support": "direct"
+    }
+  ],
+  "snapshot_note": "Full publisher-page captures are retained as private research evidence, not distributed in this repository."
+}

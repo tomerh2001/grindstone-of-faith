@@ -1,0 +1,2449 @@
+{
+  "metadata": {
+    "item": "Grindstone of Faith",
+    "currency": "mesos",
+    "transcribed_on": "2026-09-10",
+    "capture_timestamp": "Not provided; active asks are a screenshot snapshot, not live inventory.",
+    "source": "Six user-supplied Auction House screenshots, manually visually transcribed.",
+    "classification": "Yellow rows with Market Price selected are historical sales; white rows with time remaining are active asks.",
+    "scope": "All 54 visible rows: 36 historical sale rows (39 stones) and 18 active asking-price rows (71 stones).",
+    "order": "Unit Price ascending in all six screenshots.",
+    "limitations": [
+      "Historical pages 1, 2, 6, and 11 of 12 are selected price-sorted slices, not a random or complete market sample.",
+      "Active pages 1 and 2 of 5 show only the cheapest visible listings; remaining pages are absent.",
+      "Descriptive historical means and medians characterize only transcribed rows, not the full market.",
+      "Do not infer a full-market time trend, volatility, confidence interval, causal update effect, or future prices from these selected pages.",
+      "Historical trades are not prices at which stones can necessarily be bought now; active asking prices are not evidence of executed trades.",
+      "Current World Only is visibly unchecked where the checkbox is shown; market/world scope is unconfirmed.",
+      "The unit supply ladder assumes all listed stones remain available and partial-stack purchases are possible at the displayed unit price.",
+      "A separate whole-lot ladder supplies acquisition-cost bounds if listings must be bought in full; it does not credit leftover resale value.",
+      "Duplicate unit prices are separate visible rows, including page 1/page 2 active rows with different time-left values; they have not been deduplicated."
+    ]
+  },
+  "rows": [
+    {
+      "id": "mr337z0-1",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 1,
+      "unit_price_mesos": 9098888888,
+      "quantity": 1,
+      "total_price_mesos": 9098888888,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-2",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 2,
+      "unit_price_mesos": 9099999999,
+      "quantity": 1,
+      "total_price_mesos": 9099999999,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-3",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 3,
+      "unit_price_mesos": 9099999999,
+      "quantity": 1,
+      "total_price_mesos": 9099999999,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-4",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 4,
+      "unit_price_mesos": 9099999999,
+      "quantity": 1,
+      "total_price_mesos": 9099999999,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-5",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 5,
+      "unit_price_mesos": 9099999999,
+      "quantity": 2,
+      "total_price_mesos": 18199999998,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-6",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 6,
+      "unit_price_mesos": 9111111111,
+      "quantity": 1,
+      "total_price_mesos": 9111111111,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-7",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 7,
+      "unit_price_mesos": 9333222222,
+      "quantity": 1,
+      "total_price_mesos": 9333222222,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-8",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 8,
+      "unit_price_mesos": 9333333333,
+      "quantity": 1,
+      "total_price_mesos": 9333333333,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "mr337z0-9",
+      "screenshot": "mr337z0.png",
+      "kind": "historical_sale",
+      "page": 1,
+      "pages": 12,
+      "row": 9,
+      "unit_price_mesos": 9349999999,
+      "quantity": 2,
+      "total_price_mesos": 18699999998,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-1",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 1,
+      "unit_price_mesos": 9355555555,
+      "quantity": 1,
+      "total_price_mesos": 9355555555,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-2",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 2,
+      "unit_price_mesos": 9379889999,
+      "quantity": 1,
+      "total_price_mesos": 9379889999,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-3",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 3,
+      "unit_price_mesos": 9400000000,
+      "quantity": 1,
+      "total_price_mesos": 9400000000,
+      "sale_date": "2026-09-05",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-4",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 4,
+      "unit_price_mesos": 9400000000,
+      "quantity": 1,
+      "total_price_mesos": 9400000000,
+      "sale_date": "2026-09-05",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-5",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 5,
+      "unit_price_mesos": 9400000000,
+      "quantity": 1,
+      "total_price_mesos": 9400000000,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-6",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 6,
+      "unit_price_mesos": 9400000000,
+      "quantity": 1,
+      "total_price_mesos": 9400000000,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-7",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 7,
+      "unit_price_mesos": 9444333333,
+      "quantity": 1,
+      "total_price_mesos": 9444333333,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-8",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 8,
+      "unit_price_mesos": 9444444332,
+      "quantity": 1,
+      "total_price_mesos": 9444444332,
+      "sale_date": "2026-09-04",
+      "time_left": null
+    },
+    {
+      "id": "jv9kt40-9",
+      "screenshot": "jv9kt40.png",
+      "kind": "historical_sale",
+      "page": 2,
+      "pages": 12,
+      "row": 9,
+      "unit_price_mesos": 9444444444,
+      "quantity": 1,
+      "total_price_mesos": 9444444444,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-1",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 1,
+      "unit_price_mesos": 9889999999,
+      "quantity": 1,
+      "total_price_mesos": 9889999999,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-2",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 2,
+      "unit_price_mesos": 9899999999,
+      "quantity": 1,
+      "total_price_mesos": 9899999999,
+      "sale_date": "2026-09-06",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-3",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 3,
+      "unit_price_mesos": 9899999999,
+      "quantity": 1,
+      "total_price_mesos": 9899999999,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-4",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 4,
+      "unit_price_mesos": 9949999999,
+      "quantity": 1,
+      "total_price_mesos": 9949999999,
+      "sale_date": "2026-09-05",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-5",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 5,
+      "unit_price_mesos": 9987654321,
+      "quantity": 1,
+      "total_price_mesos": 9987654321,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-6",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 6,
+      "unit_price_mesos": 9988888888,
+      "quantity": 1,
+      "total_price_mesos": 9988888888,
+      "sale_date": "2026-09-07",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-7",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 7,
+      "unit_price_mesos": 9999888777,
+      "quantity": 1,
+      "total_price_mesos": 9999888777,
+      "sale_date": "2026-09-06",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-8",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 8,
+      "unit_price_mesos": 9999997777,
+      "quantity": 1,
+      "total_price_mesos": 9999997777,
+      "sale_date": "2026-09-05",
+      "time_left": null
+    },
+    {
+      "id": "899nqp6-9",
+      "screenshot": "899nqp6.png",
+      "kind": "historical_sale",
+      "page": 6,
+      "pages": 12,
+      "row": 9,
+      "unit_price_mesos": 9999999000,
+      "quantity": 1,
+      "total_price_mesos": 9999999000,
+      "sale_date": "2026-09-06",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-1",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 1,
+      "unit_price_mesos": 12499899999,
+      "quantity": 1,
+      "total_price_mesos": 12499899999,
+      "sale_date": "2026-09-08",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-2",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 2,
+      "unit_price_mesos": 12777777777,
+      "quantity": 1,
+      "total_price_mesos": 12777777777,
+      "sale_date": "2026-09-08",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-3",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 3,
+      "unit_price_mesos": 13984999999,
+      "quantity": 1,
+      "total_price_mesos": 13984999999,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-4",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 4,
+      "unit_price_mesos": 13986766665,
+      "quantity": 1,
+      "total_price_mesos": 13986766665,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-5",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 5,
+      "unit_price_mesos": 14000000000,
+      "quantity": 1,
+      "total_price_mesos": 14000000000,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-6",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 6,
+      "unit_price_mesos": 14266666667,
+      "quantity": 1,
+      "total_price_mesos": 14266666667,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-7",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 7,
+      "unit_price_mesos": 14299998999,
+      "quantity": 2,
+      "total_price_mesos": 28599997998,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-8",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 8,
+      "unit_price_mesos": 14499999999,
+      "quantity": 1,
+      "total_price_mesos": 14499999999,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "kw59hqt-9",
+      "screenshot": "kw59hqt.png",
+      "kind": "historical_sale",
+      "page": 11,
+      "pages": 12,
+      "row": 9,
+      "unit_price_mesos": 14999999999,
+      "quantity": 1,
+      "total_price_mesos": 14999999999,
+      "sale_date": "2026-09-09",
+      "time_left": null
+    },
+    {
+      "id": "s1bdnh2-1",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 1,
+      "unit_price_mesos": 11999696969,
+      "quantity": 1,
+      "total_price_mesos": 11999696969,
+      "sale_date": null,
+      "time_left": "47 hr 52 min"
+    },
+    {
+      "id": "s1bdnh2-2",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 2,
+      "unit_price_mesos": 11999999998,
+      "quantity": 1,
+      "total_price_mesos": 11999999998,
+      "sale_date": null,
+      "time_left": "47 hr 58 min"
+    },
+    {
+      "id": "s1bdnh2-3",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 3,
+      "unit_price_mesos": 11999999999,
+      "quantity": 19,
+      "total_price_mesos": 227999999981,
+      "sale_date": null,
+      "time_left": "47 hr 45 min"
+    },
+    {
+      "id": "s1bdnh2-4",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 4,
+      "unit_price_mesos": 13499999999,
+      "quantity": 1,
+      "total_price_mesos": 13499999999,
+      "sale_date": null,
+      "time_left": "47 hr 10 min"
+    },
+    {
+      "id": "s1bdnh2-5",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 5,
+      "unit_price_mesos": 13500000000,
+      "quantity": 1,
+      "total_price_mesos": 13500000000,
+      "sale_date": null,
+      "time_left": "46 hr 52 min"
+    },
+    {
+      "id": "s1bdnh2-6",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 6,
+      "unit_price_mesos": 13800000000,
+      "quantity": 1,
+      "total_price_mesos": 13800000000,
+      "sale_date": null,
+      "time_left": "37 hr 55 min"
+    },
+    {
+      "id": "s1bdnh2-7",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 7,
+      "unit_price_mesos": 13888887999,
+      "quantity": 1,
+      "total_price_mesos": 13888887999,
+      "sale_date": null,
+      "time_left": "36 hr 34 min"
+    },
+    {
+      "id": "s1bdnh2-8",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 8,
+      "unit_price_mesos": 13888888880,
+      "quantity": 1,
+      "total_price_mesos": 13888888880,
+      "sale_date": null,
+      "time_left": "33 hr 11 min"
+    },
+    {
+      "id": "s1bdnh2-9",
+      "screenshot": "s1bdnh2.png",
+      "kind": "active_ask",
+      "page": 1,
+      "pages": 5,
+      "row": 9,
+      "unit_price_mesos": 13888888888,
+      "quantity": 1,
+      "total_price_mesos": 13888888888,
+      "sale_date": null,
+      "time_left": "30 hr 59 min"
+    },
+    {
+      "id": "1kbts2x-1",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 1,
+      "unit_price_mesos": 13888888888,
+      "quantity": 1,
+      "total_price_mesos": 13888888888,
+      "sale_date": null,
+      "time_left": "47 hr 20 min"
+    },
+    {
+      "id": "1kbts2x-2",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 2,
+      "unit_price_mesos": 13999999999,
+      "quantity": 2,
+      "total_price_mesos": 27999999998,
+      "sale_date": null,
+      "time_left": "46 hr 34 min"
+    },
+    {
+      "id": "1kbts2x-3",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 3,
+      "unit_price_mesos": 14000000000,
+      "quantity": 1,
+      "total_price_mesos": 14000000000,
+      "sale_date": null,
+      "time_left": "30 hr 42 min"
+    },
+    {
+      "id": "1kbts2x-4",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 4,
+      "unit_price_mesos": 14000000000,
+      "quantity": 20,
+      "total_price_mesos": 280000000000,
+      "sale_date": null,
+      "time_left": "47 hr 06 min"
+    },
+    {
+      "id": "1kbts2x-5",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 5,
+      "unit_price_mesos": 14499999998,
+      "quantity": 1,
+      "total_price_mesos": 14499999998,
+      "sale_date": null,
+      "time_left": "29 hr 41 min"
+    },
+    {
+      "id": "1kbts2x-6",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 6,
+      "unit_price_mesos": 14499999999,
+      "quantity": 1,
+      "total_price_mesos": 14499999999,
+      "sale_date": null,
+      "time_left": "29 hr 21 min"
+    },
+    {
+      "id": "1kbts2x-7",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 7,
+      "unit_price_mesos": 14888888888,
+      "quantity": 1,
+      "total_price_mesos": 14888888888,
+      "sale_date": null,
+      "time_left": "28 hr 42 min"
+    },
+    {
+      "id": "1kbts2x-8",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 8,
+      "unit_price_mesos": 14888888888,
+      "quantity": 16,
+      "total_price_mesos": 238222222208,
+      "sale_date": null,
+      "time_left": "46 hr 33 min"
+    },
+    {
+      "id": "1kbts2x-9",
+      "screenshot": "1kbts2x.png",
+      "kind": "active_ask",
+      "page": 2,
+      "pages": 5,
+      "row": 9,
+      "unit_price_mesos": 14899999998,
+      "quantity": 1,
+      "total_price_mesos": 14899999998,
+      "sale_date": null,
+      "time_left": "27 hr 13 min"
+    }
+  ],
+  "statistics": {
+    "historical_visible": {
+      "rows": 36,
+      "units": 39,
+      "min_unit_price_mesos": 9098888888,
+      "max_unit_price_mesos": 14999999999,
+      "row_median_unit_price_mesos": 9667222221.5,
+      "row_mean_unit_price_mesos": 10617437835.416666,
+      "unit_weighted_median_mesos": 9444444444,
+      "unit_weighted_mean_mesos": 10640455412.102564,
+      "total_value_mesos": 414977761072
+    },
+    "active_visible": {
+      "rows": 18,
+      "units": 71,
+      "min_unit_price_mesos": 11999696969,
+      "max_unit_price_mesos": 14899999998,
+      "row_median_unit_price_mesos": 13888888888.0,
+      "row_mean_unit_price_mesos": 13779612743.88889,
+      "unit_weighted_median_mesos": 14000000000,
+      "unit_weighted_mean_mesos": 13624878347.760563,
+      "total_value_mesos": 967366362691
+    },
+    "historical_by_screenshot": {
+      "mr337z0.png": {
+        "rows": 9,
+        "units": 11,
+        "min_unit_price_mesos": 9098888888,
+        "max_unit_price_mesos": 9349999999,
+        "row_median_unit_price_mesos": 9099999999,
+        "row_mean_unit_price_mesos": 9180728394.333334,
+        "unit_weighted_median_mesos": 9099999999,
+        "unit_weighted_mean_mesos": 9188777777,
+        "total_value_mesos": 101076555547
+      },
+      "jv9kt40.png": {
+        "rows": 9,
+        "units": 9,
+        "min_unit_price_mesos": 9355555555,
+        "max_unit_price_mesos": 9444444444,
+        "row_median_unit_price_mesos": 9400000000,
+        "row_mean_unit_price_mesos": 9407629740.333334,
+        "unit_weighted_median_mesos": 9400000000,
+        "unit_weighted_mean_mesos": 9407629740.333334,
+        "total_value_mesos": 84668667663
+      },
+      "899nqp6.png": {
+        "rows": 9,
+        "units": 9,
+        "min_unit_price_mesos": 9889999999,
+        "max_unit_price_mesos": 9999999000,
+        "row_median_unit_price_mesos": 9987654321,
+        "row_mean_unit_price_mesos": 9957380973.222221,
+        "unit_weighted_median_mesos": 9987654321,
+        "unit_weighted_mean_mesos": 9957380973.222221,
+        "total_value_mesos": 89616428759
+      },
+      "kw59hqt.png": {
+        "rows": 9,
+        "units": 10,
+        "min_unit_price_mesos": 12499899999,
+        "max_unit_price_mesos": 14999999999,
+        "row_median_unit_price_mesos": 14000000000,
+        "row_mean_unit_price_mesos": 13924012233.777779,
+        "unit_weighted_median_mesos": 14133333333.5,
+        "unit_weighted_mean_mesos": 13961610910.3,
+        "total_value_mesos": 139616109103
+      }
+    }
+  },
+  "active_supply_levels": [
+    {
+      "unit_price_mesos": 11999696969,
+      "units_at_price": 1,
+      "cumulative_units": 1,
+      "cumulative_cost_mesos": 11999696969
+    },
+    {
+      "unit_price_mesos": 11999999998,
+      "units_at_price": 1,
+      "cumulative_units": 2,
+      "cumulative_cost_mesos": 23999696967
+    },
+    {
+      "unit_price_mesos": 11999999999,
+      "units_at_price": 19,
+      "cumulative_units": 21,
+      "cumulative_cost_mesos": 251999696948
+    },
+    {
+      "unit_price_mesos": 13499999999,
+      "units_at_price": 1,
+      "cumulative_units": 22,
+      "cumulative_cost_mesos": 265499696947
+    },
+    {
+      "unit_price_mesos": 13500000000,
+      "units_at_price": 1,
+      "cumulative_units": 23,
+      "cumulative_cost_mesos": 278999696947
+    },
+    {
+      "unit_price_mesos": 13800000000,
+      "units_at_price": 1,
+      "cumulative_units": 24,
+      "cumulative_cost_mesos": 292799696947
+    },
+    {
+      "unit_price_mesos": 13888887999,
+      "units_at_price": 1,
+      "cumulative_units": 25,
+      "cumulative_cost_mesos": 306688584946
+    },
+    {
+      "unit_price_mesos": 13888888880,
+      "units_at_price": 1,
+      "cumulative_units": 26,
+      "cumulative_cost_mesos": 320577473826
+    },
+    {
+      "unit_price_mesos": 13888888888,
+      "units_at_price": 2,
+      "cumulative_units": 28,
+      "cumulative_cost_mesos": 348355251602
+    },
+    {
+      "unit_price_mesos": 13999999999,
+      "units_at_price": 2,
+      "cumulative_units": 30,
+      "cumulative_cost_mesos": 376355251600
+    },
+    {
+      "unit_price_mesos": 14000000000,
+      "units_at_price": 21,
+      "cumulative_units": 51,
+      "cumulative_cost_mesos": 670355251600
+    },
+    {
+      "unit_price_mesos": 14499999998,
+      "units_at_price": 1,
+      "cumulative_units": 52,
+      "cumulative_cost_mesos": 684855251598
+    },
+    {
+      "unit_price_mesos": 14499999999,
+      "units_at_price": 1,
+      "cumulative_units": 53,
+      "cumulative_cost_mesos": 699355251597
+    },
+    {
+      "unit_price_mesos": 14888888888,
+      "units_at_price": 17,
+      "cumulative_units": 70,
+      "cumulative_cost_mesos": 952466362693
+    },
+    {
+      "unit_price_mesos": 14899999998,
+      "units_at_price": 1,
+      "cumulative_units": 71,
+      "cumulative_cost_mesos": 967366362691
+    }
+  ],
+  "active_unit_purchase_ladder": [
+    {
+      "stones": 1,
+      "marginal_price_mesos": 11999696969,
+      "cumulative_cost_mesos": 11999696969,
+      "average_price_mesos": 11999696969.0
+    },
+    {
+      "stones": 2,
+      "marginal_price_mesos": 11999999998,
+      "cumulative_cost_mesos": 23999696967,
+      "average_price_mesos": 11999848483.5
+    },
+    {
+      "stones": 3,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 35999696966,
+      "average_price_mesos": 11999898988.666666
+    },
+    {
+      "stones": 4,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 47999696965,
+      "average_price_mesos": 11999924241.25
+    },
+    {
+      "stones": 5,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 59999696964,
+      "average_price_mesos": 11999939392.8
+    },
+    {
+      "stones": 6,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 71999696963,
+      "average_price_mesos": 11999949493.833334
+    },
+    {
+      "stones": 7,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 83999696962,
+      "average_price_mesos": 11999956708.857143
+    },
+    {
+      "stones": 8,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 95999696961,
+      "average_price_mesos": 11999962120.125
+    },
+    {
+      "stones": 9,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 107999696960,
+      "average_price_mesos": 11999966328.88889
+    },
+    {
+      "stones": 10,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 119999696959,
+      "average_price_mesos": 11999969695.9
+    },
+    {
+      "stones": 11,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 131999696958,
+      "average_price_mesos": 11999972450.727272
+    },
+    {
+      "stones": 12,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 143999696957,
+      "average_price_mesos": 11999974746.416666
+    },
+    {
+      "stones": 13,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 155999696956,
+      "average_price_mesos": 11999976688.923077
+    },
+    {
+      "stones": 14,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 167999696955,
+      "average_price_mesos": 11999978353.928572
+    },
+    {
+      "stones": 15,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 179999696954,
+      "average_price_mesos": 11999979796.933332
+    },
+    {
+      "stones": 16,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 191999696953,
+      "average_price_mesos": 11999981059.5625
+    },
+    {
+      "stones": 17,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 203999696952,
+      "average_price_mesos": 11999982173.647058
+    },
+    {
+      "stones": 18,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 215999696951,
+      "average_price_mesos": 11999983163.944445
+    },
+    {
+      "stones": 19,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 227999696950,
+      "average_price_mesos": 11999984050.0
+    },
+    {
+      "stones": 20,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 239999696949,
+      "average_price_mesos": 11999984847.45
+    },
+    {
+      "stones": 21,
+      "marginal_price_mesos": 11999999999,
+      "cumulative_cost_mesos": 251999696948,
+      "average_price_mesos": 11999985568.952381
+    },
+    {
+      "stones": 22,
+      "marginal_price_mesos": 13499999999,
+      "cumulative_cost_mesos": 265499696947,
+      "average_price_mesos": 12068168043.045454
+    },
+    {
+      "stones": 23,
+      "marginal_price_mesos": 13500000000,
+      "cumulative_cost_mesos": 278999696947,
+      "average_price_mesos": 12130421606.391304
+    },
+    {
+      "stones": 24,
+      "marginal_price_mesos": 13800000000,
+      "cumulative_cost_mesos": 292799696947,
+      "average_price_mesos": 12199987372.791666
+    },
+    {
+      "stones": 25,
+      "marginal_price_mesos": 13888887999,
+      "cumulative_cost_mesos": 306688584946,
+      "average_price_mesos": 12267543397.84
+    },
+    {
+      "stones": 26,
+      "marginal_price_mesos": 13888888880,
+      "cumulative_cost_mesos": 320577473826,
+      "average_price_mesos": 12329902839.461538
+    },
+    {
+      "stones": 27,
+      "marginal_price_mesos": 13888888888,
+      "cumulative_cost_mesos": 334466362714,
+      "average_price_mesos": 12387643063.481482
+    },
+    {
+      "stones": 28,
+      "marginal_price_mesos": 13888888888,
+      "cumulative_cost_mesos": 348355251602,
+      "average_price_mesos": 12441258985.785715
+    },
+    {
+      "stones": 29,
+      "marginal_price_mesos": 13999999999,
+      "cumulative_cost_mesos": 362355251601,
+      "average_price_mesos": 12495008675.896551
+    },
+    {
+      "stones": 30,
+      "marginal_price_mesos": 13999999999,
+      "cumulative_cost_mesos": 376355251600,
+      "average_price_mesos": 12545175053.333334
+    },
+    {
+      "stones": 31,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 390355251600,
+      "average_price_mesos": 12592104890.32258
+    },
+    {
+      "stones": 32,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 404355251600,
+      "average_price_mesos": 12636101612.5
+    },
+    {
+      "stones": 33,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 418355251600,
+      "average_price_mesos": 12677431866.666666
+    },
+    {
+      "stones": 34,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 432355251600,
+      "average_price_mesos": 12716330929.411764
+    },
+    {
+      "stones": 35,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 446355251600,
+      "average_price_mesos": 12753007188.571428
+    },
+    {
+      "stones": 36,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 460355251600,
+      "average_price_mesos": 12787645877.777779
+    },
+    {
+      "stones": 37,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 474355251600,
+      "average_price_mesos": 12820412205.405405
+    },
+    {
+      "stones": 38,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 488355251600,
+      "average_price_mesos": 12851453989.473684
+    },
+    {
+      "stones": 39,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 502355251600,
+      "average_price_mesos": 12880903887.179487
+    },
+    {
+      "stones": 40,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 516355251600,
+      "average_price_mesos": 12908881290.0
+    },
+    {
+      "stones": 41,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 530355251600,
+      "average_price_mesos": 12935493941.463415
+    },
+    {
+      "stones": 42,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 544355251600,
+      "average_price_mesos": 12960839323.809525
+    },
+    {
+      "stones": 43,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 558355251600,
+      "average_price_mesos": 12985005851.16279
+    },
+    {
+      "stones": 44,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 572355251600,
+      "average_price_mesos": 13008073900.0
+    },
+    {
+      "stones": 45,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 586355251600,
+      "average_price_mesos": 13030116702.222221
+    },
+    {
+      "stones": 46,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 600355251600,
+      "average_price_mesos": 13051201121.73913
+    },
+    {
+      "stones": 47,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 614355251600,
+      "average_price_mesos": 13071388331.914894
+    },
+    {
+      "stones": 48,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 628355251600,
+      "average_price_mesos": 13090734408.333334
+    },
+    {
+      "stones": 49,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 642355251600,
+      "average_price_mesos": 13109290848.979591
+    },
+    {
+      "stones": 50,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 656355251600,
+      "average_price_mesos": 13127105032.0
+    },
+    {
+      "stones": 51,
+      "marginal_price_mesos": 14000000000,
+      "cumulative_cost_mesos": 670355251600,
+      "average_price_mesos": 13144220619.607843
+    },
+    {
+      "stones": 52,
+      "marginal_price_mesos": 14499999998,
+      "cumulative_cost_mesos": 684855251598,
+      "average_price_mesos": 13170293299.961538
+    },
+    {
+      "stones": 53,
+      "marginal_price_mesos": 14499999999,
+      "cumulative_cost_mesos": 699355251597,
+      "average_price_mesos": 13195382105.603773
+    },
+    {
+      "stones": 54,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 714244140485,
+      "average_price_mesos": 13226743342.314816
+    },
+    {
+      "stones": 55,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 729133029373,
+      "average_price_mesos": 13256964170.418182
+    },
+    {
+      "stones": 56,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 744021918261,
+      "average_price_mesos": 13286105683.232143
+    },
+    {
+      "stones": 57,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 758910807149,
+      "average_price_mesos": 13314224686.824562
+    },
+    {
+      "stones": 58,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 773799696037,
+      "average_price_mesos": 13341374069.603449
+    },
+    {
+      "stones": 59,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 788688584925,
+      "average_price_mesos": 13367603134.322035
+    },
+    {
+      "stones": 60,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 803577473813,
+      "average_price_mesos": 13392957896.883333
+    },
+    {
+      "stones": 61,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 818466362701,
+      "average_price_mesos": 13417481355.754099
+    },
+    {
+      "stones": 62,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 833355251589,
+      "average_price_mesos": 13441213735.306452
+    },
+    {
+      "stones": 63,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 848244140477,
+      "average_price_mesos": 13464192705.984127
+    },
+    {
+      "stones": 64,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 863133029365,
+      "average_price_mesos": 13486453583.828125
+    },
+    {
+      "stones": 65,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 878021918253,
+      "average_price_mesos": 13508029511.584616
+    },
+    {
+      "stones": 66,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 892910807141,
+      "average_price_mesos": 13528951623.348484
+    },
+    {
+      "stones": 67,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 907799696029,
+      "average_price_mesos": 13549249194.462687
+    },
+    {
+      "stones": 68,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 922688584917,
+      "average_price_mesos": 13568949778.191177
+    },
+    {
+      "stones": 69,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 937577473805,
+      "average_price_mesos": 13588079330.507246
+    },
+    {
+      "stones": 70,
+      "marginal_price_mesos": 14888888888,
+      "cumulative_cost_mesos": 952466362693,
+      "average_price_mesos": 13606662324.185715
+    },
+    {
+      "stones": 71,
+      "marginal_price_mesos": 14899999998,
+      "cumulative_cost_mesos": 967366362691,
+      "average_price_mesos": 13624878347.760563
+    }
+  ],
+  "active_whole_lot_acquisition_ladder": [
+    {
+      "stones_needed": 1,
+      "stones_purchased": 1,
+      "acquisition_cost_mesos": 11999696969,
+      "lot_ids": [
+        "s1bdnh2-1"
+      ]
+    },
+    {
+      "stones_needed": 2,
+      "stones_purchased": 2,
+      "acquisition_cost_mesos": 23999696967,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2"
+      ]
+    },
+    {
+      "stones_needed": 3,
+      "stones_purchased": 3,
+      "acquisition_cost_mesos": 37499696966,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4"
+      ]
+    },
+    {
+      "stones_needed": 4,
+      "stones_purchased": 4,
+      "acquisition_cost_mesos": 50999696966,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5"
+      ]
+    },
+    {
+      "stones_needed": 5,
+      "stones_purchased": 5,
+      "acquisition_cost_mesos": 64799696966,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6"
+      ]
+    },
+    {
+      "stones_needed": 6,
+      "stones_purchased": 6,
+      "acquisition_cost_mesos": 78688584965,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7"
+      ]
+    },
+    {
+      "stones_needed": 7,
+      "stones_purchased": 7,
+      "acquisition_cost_mesos": 92577473845,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8"
+      ]
+    },
+    {
+      "stones_needed": 8,
+      "stones_purchased": 8,
+      "acquisition_cost_mesos": 106466362733,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9"
+      ]
+    },
+    {
+      "stones_needed": 9,
+      "stones_purchased": 9,
+      "acquisition_cost_mesos": 120355251621,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1"
+      ]
+    },
+    {
+      "stones_needed": 10,
+      "stones_purchased": 10,
+      "acquisition_cost_mesos": 134355251621,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-3"
+      ]
+    },
+    {
+      "stones_needed": 11,
+      "stones_purchased": 11,
+      "acquisition_cost_mesos": 148355251619,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2"
+      ]
+    },
+    {
+      "stones_needed": 12,
+      "stones_purchased": 12,
+      "acquisition_cost_mesos": 162355251619,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3"
+      ]
+    },
+    {
+      "stones_needed": 13,
+      "stones_purchased": 13,
+      "acquisition_cost_mesos": 176855251617,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5"
+      ]
+    },
+    {
+      "stones_needed": 14,
+      "stones_purchased": 14,
+      "acquisition_cost_mesos": 191355251616,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6"
+      ]
+    },
+    {
+      "stones_needed": 15,
+      "stones_purchased": 15,
+      "acquisition_cost_mesos": 206244140504,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7"
+      ]
+    },
+    {
+      "stones_needed": 16,
+      "stones_purchased": 16,
+      "acquisition_cost_mesos": 221144140502,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7",
+        "1kbts2x-9"
+      ]
+    },
+    {
+      "stones_needed": 17,
+      "stones_purchased": 19,
+      "acquisition_cost_mesos": 227999999981,
+      "lot_ids": [
+        "s1bdnh2-3"
+      ]
+    },
+    {
+      "stones_needed": 18,
+      "stones_purchased": 19,
+      "acquisition_cost_mesos": 227999999981,
+      "lot_ids": [
+        "s1bdnh2-3"
+      ]
+    },
+    {
+      "stones_needed": 19,
+      "stones_purchased": 19,
+      "acquisition_cost_mesos": 227999999981,
+      "lot_ids": [
+        "s1bdnh2-3"
+      ]
+    },
+    {
+      "stones_needed": 20,
+      "stones_purchased": 20,
+      "acquisition_cost_mesos": 239999696950,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-3"
+      ]
+    },
+    {
+      "stones_needed": 21,
+      "stones_purchased": 21,
+      "acquisition_cost_mesos": 251999696948,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3"
+      ]
+    },
+    {
+      "stones_needed": 22,
+      "stones_purchased": 22,
+      "acquisition_cost_mesos": 265499696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4"
+      ]
+    },
+    {
+      "stones_needed": 23,
+      "stones_purchased": 23,
+      "acquisition_cost_mesos": 278999696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5"
+      ]
+    },
+    {
+      "stones_needed": 24,
+      "stones_purchased": 24,
+      "acquisition_cost_mesos": 292799696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6"
+      ]
+    },
+    {
+      "stones_needed": 25,
+      "stones_purchased": 25,
+      "acquisition_cost_mesos": 306688584946,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7"
+      ]
+    },
+    {
+      "stones_needed": 26,
+      "stones_purchased": 26,
+      "acquisition_cost_mesos": 320577473826,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8"
+      ]
+    },
+    {
+      "stones_needed": 27,
+      "stones_purchased": 27,
+      "acquisition_cost_mesos": 334466362714,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9"
+      ]
+    },
+    {
+      "stones_needed": 28,
+      "stones_purchased": 28,
+      "acquisition_cost_mesos": 348355251602,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1"
+      ]
+    },
+    {
+      "stones_needed": 29,
+      "stones_purchased": 29,
+      "acquisition_cost_mesos": 362355251602,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-3"
+      ]
+    },
+    {
+      "stones_needed": 30,
+      "stones_purchased": 30,
+      "acquisition_cost_mesos": 376355251600,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2"
+      ]
+    },
+    {
+      "stones_needed": 31,
+      "stones_purchased": 31,
+      "acquisition_cost_mesos": 390355251600,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3"
+      ]
+    },
+    {
+      "stones_needed": 32,
+      "stones_purchased": 32,
+      "acquisition_cost_mesos": 404855251598,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5"
+      ]
+    },
+    {
+      "stones_needed": 33,
+      "stones_purchased": 33,
+      "acquisition_cost_mesos": 419355251597,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6"
+      ]
+    },
+    {
+      "stones_needed": 34,
+      "stones_purchased": 34,
+      "acquisition_cost_mesos": 434244140485,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7"
+      ]
+    },
+    {
+      "stones_needed": 35,
+      "stones_purchased": 35,
+      "acquisition_cost_mesos": 449144140483,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7",
+        "1kbts2x-9"
+      ]
+    },
+    {
+      "stones_needed": 36,
+      "stones_purchased": 36,
+      "acquisition_cost_mesos": 478221919158,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-3",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 37,
+      "stones_purchased": 37,
+      "acquisition_cost_mesos": 490221919156,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 38,
+      "stones_purchased": 38,
+      "acquisition_cost_mesos": 503721919155,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 39,
+      "stones_purchased": 39,
+      "acquisition_cost_mesos": 507999999981,
+      "lot_ids": [
+        "s1bdnh2-3",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 40,
+      "stones_purchased": 40,
+      "acquisition_cost_mesos": 519999696950,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-3",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 41,
+      "stones_purchased": 41,
+      "acquisition_cost_mesos": 531999696948,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 42,
+      "stones_purchased": 42,
+      "acquisition_cost_mesos": 545499696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 43,
+      "stones_purchased": 43,
+      "acquisition_cost_mesos": 558999696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 44,
+      "stones_purchased": 44,
+      "acquisition_cost_mesos": 572799696947,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 45,
+      "stones_purchased": 45,
+      "acquisition_cost_mesos": 586688584946,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 46,
+      "stones_purchased": 46,
+      "acquisition_cost_mesos": 600577473826,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 47,
+      "stones_purchased": 47,
+      "acquisition_cost_mesos": 614466362714,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 48,
+      "stones_purchased": 48,
+      "acquisition_cost_mesos": 628355251602,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 49,
+      "stones_purchased": 49,
+      "acquisition_cost_mesos": 642355251602,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-3",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 50,
+      "stones_purchased": 50,
+      "acquisition_cost_mesos": 656355251600,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 51,
+      "stones_purchased": 51,
+      "acquisition_cost_mesos": 670355251600,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4"
+      ]
+    },
+    {
+      "stones_needed": 52,
+      "stones_purchased": 52,
+      "acquisition_cost_mesos": 684855251598,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5"
+      ]
+    },
+    {
+      "stones_needed": 53,
+      "stones_purchased": 53,
+      "acquisition_cost_mesos": 699355251597,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6"
+      ]
+    },
+    {
+      "stones_needed": 54,
+      "stones_purchased": 54,
+      "acquisition_cost_mesos": 714244140485,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7"
+      ]
+    },
+    {
+      "stones_needed": 55,
+      "stones_purchased": 55,
+      "acquisition_cost_mesos": 729144140483,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7",
+        "1kbts2x-9"
+      ]
+    },
+    {
+      "stones_needed": 56,
+      "stones_purchased": 56,
+      "acquisition_cost_mesos": 758221919158,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-3",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 57,
+      "stones_purchased": 57,
+      "acquisition_cost_mesos": 770221919156,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 58,
+      "stones_purchased": 58,
+      "acquisition_cost_mesos": 783721919155,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 59,
+      "stones_purchased": 59,
+      "acquisition_cost_mesos": 797221919155,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 60,
+      "stones_purchased": 60,
+      "acquisition_cost_mesos": 811021919155,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 61,
+      "stones_purchased": 61,
+      "acquisition_cost_mesos": 824910807154,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 62,
+      "stones_purchased": 62,
+      "acquisition_cost_mesos": 838799696034,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 63,
+      "stones_purchased": 63,
+      "acquisition_cost_mesos": 852688584922,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 64,
+      "stones_purchased": 64,
+      "acquisition_cost_mesos": 866577473810,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 65,
+      "stones_purchased": 65,
+      "acquisition_cost_mesos": 880577473810,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 66,
+      "stones_purchased": 66,
+      "acquisition_cost_mesos": 894577473808,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 67,
+      "stones_purchased": 67,
+      "acquisition_cost_mesos": 908577473808,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 68,
+      "stones_purchased": 68,
+      "acquisition_cost_mesos": 923077473806,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 69,
+      "stones_purchased": 69,
+      "acquisition_cost_mesos": 937577473805,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 70,
+      "stones_purchased": 70,
+      "acquisition_cost_mesos": 952466362693,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7",
+        "1kbts2x-8"
+      ]
+    },
+    {
+      "stones_needed": 71,
+      "stones_purchased": 71,
+      "acquisition_cost_mesos": 967366362691,
+      "lot_ids": [
+        "s1bdnh2-1",
+        "s1bdnh2-2",
+        "s1bdnh2-3",
+        "s1bdnh2-4",
+        "s1bdnh2-5",
+        "s1bdnh2-6",
+        "s1bdnh2-7",
+        "s1bdnh2-8",
+        "s1bdnh2-9",
+        "1kbts2x-1",
+        "1kbts2x-2",
+        "1kbts2x-3",
+        "1kbts2x-4",
+        "1kbts2x-5",
+        "1kbts2x-6",
+        "1kbts2x-7",
+        "1kbts2x-8",
+        "1kbts2x-9"
+      ]
+    }
+  ]
+}

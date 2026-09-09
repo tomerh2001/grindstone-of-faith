@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "coverage": [
+    "default recommendation",
+    "95/99% targets",
+    "price and budget changes",
+    "invalid input retention",
+    "all 20 row controls",
+    "50,000-run simulation",
+    "both evidence tabs",
+    "71-stone purchase ladder",
+    "false-certainty rounding and floating underflow",
+    "SVG output"
+  ]
+}
