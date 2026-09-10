@@ -1,15 +1,18 @@
 {
   "status": "passed",
+  "method": "Tracked jsdom interface tests plus pure simulation tests",
+  "test_command": "npm test",
   "coverage": [
-    "default recommendation",
-    "95/99% targets",
-    "price and budget changes",
-    "invalid input retention",
-    "all 20 row controls",
-    "50,000-run simulation",
-    "both evidence tabs",
-    "71-stone purchase ladder",
-    "false-certainty rounding and floating underflow",
-    "SVG output"
+    "price-first minimum-average answer and tie across all 20 batches",
+    "optional confidence target remains separate from average objective",
+    "single-upgrade animated attempts, cumulative cost, instant finish",
+    "progressive histogram with every tail outcome",
+    "chronological running mean and exact expectation reference",
+    "stop, restart, immediate stop after restart",
+    "input changes cancel pending simulation callbacks",
+    "invalid inputs disable simulations",
+    "seed changes across repeated experiments",
+    "market evidence tabs and exact purchase total",
+    "false-certainty rounding and floating underflow"
   ]
 }

@@ -9,6 +9,8 @@
 
 ## Recommendation
 
+The primary objective is **lowest average spending to complete an upgrade**. Under a fixed stone price and the new linear fee, every batch from 1 to 20 ties for that objective. Twenty is the practical recommendation because it also removes retry variance. A confidence target is a separate, optional upfront-budget question.
+
 **Use 20 Grindstones of Faith together in one attempt. Budget about 260b mesos at the visible 12b asking prices.** This gives 100% success under the published GMS v271 rules. It is the smallest hard budget for a guaranteed upgrade and removes outcome variance without increasing expected cost at a constant stone price.
 
 A concrete purchase from the screenshots is the 19-stone listing at 11,999,999,999 mesos per stone, plus the cheapest single at 11,999,696,969. Those two complete listings cost 239,999,696,950 mesos. Add the 20,000,000,000 polishing fee for **259,999,696,950 mesos total**. This assumes the listings remain available, but does not require buying part of a stack.
@@ -101,7 +103,7 @@ Each reached attempt contributes n(s+1) expected cost conditional on reaching it
 
 The 99% plans save only 2.6b in expected spending while allowing a much larger bill and a 1% failure outcome. That does not fit the aim of confidently securing an upgrade without overspending. If 19 fails and the next plan is a guaranteed 20, the completed upgrade can cost 507b.
 
-The independent verification script also implements a finite dynamic program for expected spending under a hard stone cap and target confidence. It confirms the 19→16 example at 99% with a 35-stone cap. At a 20-stone cap and 99% target, the optimal choice is 20 together. At an unusual 91% target, 18→2 attains exactly 91% with a 260b maximum and 236.6b expected spending, while 19 together offers 95% with a lower 247b maximum. The website's recommendation minimizes maximum spend, not capped expected spend at the expense of unfinished upgrades.
+The independent verification script also implements a finite dynamic program for expected spending under a hard stone cap and target confidence. It confirms the 19→16 example at 99% with a 35-stone cap. At a 20-stone cap and 99% target, the optimal choice is 20 together. At an unusual 91% target, 18→2 attains exactly 91% with a 260b maximum and 236.6b expected spending, while 19 together offers 95% with a lower 247b maximum. The website’s main answer minimizes expected completion cost and explicitly shows the tie across all batch sizes. Its optional one-attempt target minimizes maximum spend for that target rather than capped expected spending at the expense of unfinished upgrades.
 
 ## What the screenshots establish
 
@@ -140,7 +142,7 @@ With fixed nondecreasing marginal prices, buying beyond the cheap listings makes
 
 ## Verification and scope limits
 
-The JavaScript model is checked against independent arithmetic, quantile boundaries and exact snapshot totals. Two million seeded simulated completions across all 20 batch sizes agree with analytic means within six Monte Carlo standard errors and with the modeled 260b-budget success rates. The page's optional 50,000-run simulation reports a normal-approximation interval for simulation mean noise; it does not measure uncertainty in Nexon's rules.
+The JavaScript model is checked against independent arithmetic, quantile boundaries and exact snapshot totals. Two million seeded simulated completions across all 20 batch sizes agree with analytic means within six Monte Carlo standard errors and with the modeled 260b-budget success rates. The page’s visual experiment can run 10,000, 50,000 or 200,000 completed upgrades. It builds a histogram and a chronological running-average chart in chunks, and reports a normal-approximation interval for simulation mean noise. It does not measure uncertainty in Nexon’s rules. Each new experiment uses a new displayed seed. A separate playback shows every attempted polish until the first success, with cumulative costs; input changes cancel prior playback.
 
 The independent Python verifier enumerates 4,095 finite compositions through 12 stones, checks the expected-cost identity and splitting inequality, solves a maximum-success budget recurrence through 80 stones, and verifies adaptive target-confidence examples using rational probabilities. It makes no network calls.
 
@@ -156,6 +158,10 @@ For geometric calculators, do not round a nonzero failure probability to a displ
 
 This task uses a public static GitHub Pages deployment as explicitly requested. It requires no hosted backend or separate Sites account. Original screenshots and full publisher-page captures remain outside the public repository; the site publishes paraphrases, source links and the transcribed price evidence.
 
+For visual simulations, record running-average checkpoints in original trial order before aggregating a histogram or sorting for percentiles. Never select an optimum by the smallest simulated sample mean when the exact expectations tie. Keep every tail outcome in costs and bins, label any compressed playback, and cancel pending callbacks when parameters change.
+
 ## Session record
 
 Verified released mechanics against rendered primary sources; transcribed six screenshots; derived and independently checked fixed and adaptive strategies; implemented a static calculator with charts and simulation; configured GitHub Actions to validate and publish the site. No earlier research journal was superseded.
+
+The follow-up revision centers the opening on price and lowest average completion cost, with the equal-average result stated directly. It adds animated single-upgrade playback and progressive multi-upgrade histogram and running-mean charts, plus interface tests for stopping and parameter changes.

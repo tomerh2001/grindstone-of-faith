@@ -1,11 +1,13 @@
-import { strategy, successWithin, recommendedBatch, purchaseCost, simulate, formatProbability } from './model.js';
+import { strategy, successWithin, recommendedBatch, purchaseCost, formatProbability } from './model.js';
+import { SimulationView } from './simulation-view.js';
 
 const $ = id => document.getElementById(id);
 const money = (v, digits = 1) => Number.isFinite(v) ? `${v.toLocaleString('en-US', { maximumFractionDigits: digits })}b` : 'No finite limit';
 const pct = formatProbability;
 const integer = v => v.toLocaleString('en-US');
-const state = { price: 12, confidence: 100, budget: 260, batch: 5, purchaseCount: 20, market: 'active' };
+const state = { price: 12, confidence: 100, budget: 260, batch: 5, trials: 50000, purchaseCount: 20, market: 'active' };
 let market = null;
+const simulations = new SimulationView(() => state);
 const COLORS = { custom: '#b9a1ff', nineteen: '#f3cc84', guarantee: '#74eed0' };
 
 function frame(label, width = 720, height = 320) {
@@ -49,22 +51,17 @@ function render() {
   const recommendation = strategy(n, state.price, state.budget), gap = recommendation.attemptCost - state.budget;
   $('confidenceValue').textContent = `${state.confidence}%`;
   $('batchValue').textContent = `${state.batch} stones · ${pct(selected.p)}`;
-  $('recommendedN').textContent = n;
-  $('recommendedCost').textContent = money(recommendation.attemptCost, 2);
-  $('recommendedChance').textContent = pct(recommendation.p);
-  $('recommendedFailure').textContent = pct(1 - recommendation.p);
-  $('decisionBadge').textContent = n === 20 ? 'Guaranteed' : `${pct(1 - recommendation.p)} failure risk`;
-  $('stoneMeter').innerHTML = Array.from({ length: 20 }, (_, i) => `<span class="${i < n ? 'on' : ''}"></span>`).join('');
-  $('verdict').textContent = n === 20
-    ? 'Use 20 together. This guarantees success and removes the chance of paying for retries.'
-    : `Use ${n} together for ${pct(recommendation.p)} success. This is the smallest upfront budget that meets your ${state.confidence}% target, with a ${pct(1 - recommendation.p)} risk of an unsuccessful attempt.`;
+  $('bestAverage').textContent = money(selected.expectedCost, 2);
+  $('averageBreakdown').textContent = `${money(20 * state.price, 2)} in stones + 20b in fees`;
+  $('selectedSummary').innerHTML = `${state.batch} <em>per attempt</em>`;
+  $('selectedSummaryDetail').textContent = `${money(selected.attemptCost, 2)} each try · ${pct(selected.p)} success`;
+  $('tieExplanation').textContent = `At ${money(state.price, 2)} per stone, every batch averages ${money(selected.expectedCost, 2)} to finish: 20 stones plus 20b in fees. Changing the price changes this total, but all 1–20 amounts still tie.`;
+  $('targetAnswer').textContent = `${n} stones together: ${money(recommendation.attemptCost, 2)} upfront for ${pct(recommendation.p)} success (${pct(1 - recommendation.p)} failure risk).`;
   $('budgetStatus').classList.toggle('warn', gap > 1e-9);
   const affordable = Math.max(0, Math.min(20, Math.floor(state.budget / (state.price + 1) + 1e-12)));
   $('budgetStatus').textContent = gap > 1e-9
-    ? `Your limit is ${money(gap, 2)} short. It currently funds ${affordable} stones together for ${pct(affordable / 20)} success. Save the shortfall to reach your target.`
-    : `Fits your spending limit${Math.abs(gap) < 1e-9 ? ' exactly' : ` with ${money(-gap, 2)} to spare`}. ${money(n * state.price, 2)} in stones + ${money(n)} in fees.`;
-  $('nineteenTradeoff').textContent = `The closest tradeoff: 19 stones cost ${money(19 * (state.price + 1), 2)} for 95%. The twentieth costs ${money(state.price + 1, 2)} more to remove that final 5% risk.`;
-  $('meanStrip').textContent = money(selected.expectedCost, 2);
+    ? `Your optional limit is ${money(gap, 2)} short. It funds ${affordable} stones together for ${pct(affordable / 20)} success.`
+    : `Fits your optional limit${Math.abs(gap) < 1e-9 ? ' exactly' : ` with ${money(-gap, 2)} to spare`}.`;
   $('attemptCost').textContent = money(selected.attemptCost, 2);
   $('expectedCost').textContent = money(selected.expectedCost, 2);
   $('p95Cost').textContent = money(selected.p95, 2);
@@ -79,7 +76,7 @@ function render() {
   $('cappedExplanation').textContent = `For your selected ${state.batch}-stone batch and ${money(state.budget)} cap, expected spending before success or stopping is ${money(selected.expectedCappedSpend, 2)}, with ${pct(selected.budgetSuccess, 2, uncertain)} final success. This lower capped average must not be confused with the ${money(selected.expectedCost, 2)} average needed to finish when continuing until success.`;
   document.querySelectorAll('[data-price]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.price) === state.price));
   document.querySelectorAll('[data-confidence]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.confidence) === state.confidence));
-  $('simulationResult').textContent = 'Uses a fixed random seed so the same settings reproduce the same result.';
+  document.querySelectorAll('[data-batch]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.batch) === state.batch));
   cdfChart();
 }
 
@@ -135,16 +132,19 @@ function renderSources() {
 function updateInputs() {
   const names = ['price', 'confidence', 'budget', 'batch'];
   if (names.some(id => $(id).value === '' || !$(id).checkValidity() || !Number.isFinite($(id).valueAsNumber))) {
-    $('inputError').textContent = 'Enter a valid price (0–1,000b) and budget (0–1,000,000b). Results retain the last valid settings.';
-    $('simulate').disabled = true;
+    $('inputError').textContent = 'Use a price of 0–1,000b, a whole batch of 1–20 stones, and a budget of 0–1,000,000b. Results retain the last valid settings.';
+    simulations.reset(); simulations.setValid(false);
     return;
   }
+  const changed = state.price !== $('price').valueAsNumber || state.batch !== $('batch').valueAsNumber || state.trials !== Number($('trials').value);
   names.forEach(id => { state[id] = $(id).valueAsNumber; });
-  $('simulate').disabled = false;
+  state.trials = Number($('trials').value);
+  if (changed) simulations.reset();
+  simulations.setValid(true);
   $('inputError').textContent = '';
   render();
 }
-for (const id of ['price', 'confidence', 'budget', 'batch']) $(id).addEventListener('input', updateInputs);
+for (const id of ['price', 'confidence', 'budget', 'batch', 'trials']) $(id).addEventListener('input', updateInputs);
 document.addEventListener('click', event => {
   const button = event.target.closest('button');
   if (!button) return;
@@ -157,13 +157,9 @@ document.addEventListener('click', event => {
   if (button.dataset.market) { state.market = button.dataset.market; renderMarket(); }
 });
 $('purchaseCount').addEventListener('input', e => { state.purchaseCount = e.target.valueAsNumber; renderPurchase(); });
-$('simulate').addEventListener('click', () => {
-  const n = state.batch, price = state.price;
-  const result = simulate(n, price);
-  $('simulationResult').textContent = `${integer(result.trials)} runs using ${n} stones per attempt: mean ${money(result.mean, 2)} (exact ${money(20 * (price + 1), 2)}), 95th percentile ${money(result.p95)}, 99th percentile ${money(result.p99)}. Approximate 95% Monte Carlo interval for the mean: ${money(result.mean - 1.96 * result.standardError, 2)}–${money(result.mean + 1.96 * result.standardError, 2)}. This interval describes simulation noise, not uncertainty in the published rate.`;
-});
 renderSources();
 render();
+simulations.reset();
 try {
   const response = await fetch('./market.json');
   if (!response.ok) throw new Error(`Market data unavailable (${response.status})`);

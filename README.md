@@ -2,11 +2,11 @@
 
 [Open the Grindstone of Faith planner](https://tomerh2001.github.io/grindstone-of-faith/)
 
-**Use 20 stones in one attempt for a guaranteed level-6 upgrade.** At approximately 12b per stone, that is 240b in stones plus 20b in polishing fees, or 260b total. This uses the GMS v271 rules released September 9, 2026, for eligible untradable level-5 Rings of Restraint and Continuous Rings.
+**All batch sizes from 1 to 20 tie for lowest average spending when repeated until success. Use 20 per attempt as the practical recommendation: it achieves that average with no retry risk.** At approximately 12b per stone, every batch averages 240b in stones plus 20b in polishing fees, or 260b total. This uses the GMS v271 rules released September 9, 2026, for eligible untradable level-5 Rings of Restraint and Continuous Rings.
 
 Nineteen stones cost about 247b for 95% success. Smaller batches repeated until success have the same 260b expected cost at a constant stone price, but substantially larger unlucky costs. Repeat calculations assume independent outcomes, full material and fee consumption on failure, no pity, and an unchanged level-5 ring. The published 20-stone guarantee needs no assumptions about repeat failures.
 
-The site contains editable prices, probability targets and budgets; all 20 fixed-batch strategies; exact cumulative probability charts; a seeded 50,000-run simulation; a finite supply calculator; all 54 screenshot rows; and linked research. It uses no external runtime dependencies, analytics or accounts. The original screenshots and account information are not published.
+The opening has simple price, comparison-batch and simulation-size inputs, followed by the average-cost answer. Watch one upgrade attempt by attempt, or run 10,000, 50,000 or 200,000 complete upgrades while the histogram and chronological running mean fill in. Simulation results never choose the optimal batch; the exact mean establishes the tie. The site also retains all 20 strategies, optional budget and confidence targets, a finite supply calculator, all 54 screenshot rows and linked research. It uses no external runtime dependencies, analytics or accounts. The original screenshots and account information are not published.
 
 ## Evidence
 
@@ -21,9 +21,10 @@ Historical screenshots are selected price-sorted pages 1, 2, 6 and 11 of 12. The
 
 ## Reproduce
 
-Requires Node.js 24 and Python 3. No dependency installation is needed.
+Requires Node.js 24 and Python 3. The website itself has no runtime dependencies; jsdom is used for interface tests.
 
 ```sh
+npm ci
 npm run check
 npm test
 python3 research/statistics-verification.py
@@ -31,6 +32,8 @@ python3 -m http.server 8000 --directory site
 ```
 
 JavaScript tests check exact boundaries, all 20 strategies, 54 transcribed rows, supply totals and two million simulated completed upgrades. Independent rational arithmetic verifies 4,095 finite attempt sequences, a maximum-success budget recurrence through 80 stones, and adaptive strategy examples.
+
+Interface tests also verify animated attempts, instant completion, live histogram and running-mean updates, stopping, restarting, input-change cancellation and market tabs.
 
 GitHub Actions runs these checks and publishes only `site/` to GitHub Pages. Deployments use the configured `github-pages` environment. The browser recomputes exact results locally; simulations illustrate the same model.
 
