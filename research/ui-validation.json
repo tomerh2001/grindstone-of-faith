@@ -1,18 +1,24 @@
 {
   "status": "passed",
-  "method": "Tracked jsdom interface tests plus pure simulation tests",
-  "test_command": "npm test",
+  "method": "Tracked jsdom interface tests, pure model and simulation tests, independent fraction comparison",
+  "test_command": "npm test && python3 research/statistics-verification.py",
+  "tests": 22,
+  "production_strategies_verified": 30,
+  "simulated_upgrades_in_all_strategy_validation": 3000000,
   "coverage": [
-    "price-first minimum-average answer and tie across all 20 batches",
-    "optional confidence target remains separate from average objective",
-    "single-upgrade animated attempts, cumulative cost, instant finish",
-    "progressive histogram with every tail outcome",
-    "chronological running mean and exact expectation reference",
-    "stop, restart, immediate stop after restart",
-    "input changes cancel pending simulation callbacks",
-    "invalid inputs disable simulations",
-    "seed changes across repeated experiments",
-    "market evidence tabs and exact purchase total",
-    "false-certainty rounding and floating underflow"
-  ]
+    "only two calculator inputs: type and price",
+    "automatic full-batch recommendation, all legal means tied, zero variance",
+    "Life 4 to 5 with 10-stone maximum and 0.5b fee",
+    "Faith 5 to 6 with 20-stone maximum and 1b fee",
+    "exact quantile and affordable-attempt boundaries",
+    "four automatic animation and Monte Carlo comparisons",
+    "full tail histogram, chronological running mean, new experiment seeds",
+    "input changes cancel old callbacks and schedule new simulations",
+    "invalid price hides stale analysis and stops simulations",
+    "stop and immediate stop after restart clear stale charts",
+    "Life switch never relabels Faith market evidence",
+    "market tabs, 54 rows and exact finite supply cost",
+    "probability formatting preserves mathematical uncertainty"
+  ],
+  "visual_review": "No browser screenshot review performed; layout uses responsive CSS and scalable SVG. Interface behavior verified in jsdom."
 }

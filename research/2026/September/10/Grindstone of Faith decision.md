@@ -1,15 +1,30 @@
-# Grindstone of Faith: how much to spend after GMS v271
+# Life and Faith grindstones: optimal spending after GMS v271
 
 - Status: current
 - Researched and last updated: September 10, 2026
 - Canonical journal file path: research/2026/September/10/Grindstone of Faith decision.md
-- Scope: one eligible untradable level-5 skill ring, GMS Interactive
+- Scope: one eligible untradable skill ring, GMS Interactive; Life level 4 → 5 or Faith level 5 → 6 separately
 - Supersedes: none
 - Evidence: primary GMS patch notes, official release announcement, six user-supplied Auction House screenshots
 
-## Recommendation
+## Automatic recommendation for either type
 
-The primary objective is **lowest average spending to complete an upgrade**. Under a fixed stone price and the new linear fee, every batch from 1 to 20 ties for that objective. Twenty is the practical recommendation because it also removes retry variance. A confidence target is a separate, optional upfront-budget question.
+Choose the grindstone type and enter its unit price. The calculator evaluates every legal amount and recommends **20 Faith or 10 Life together in one attempt**. Every legal amount has the same average completion cost under the fixed-price, linear-fee model. The full amount also guarantees success and has zero cost variance, so it wins the tie.
+
+| Type | Upgrade | Maximum M | Chance per stone | Fee f per stone | Average and guaranteed total |
+|---|---|---:|---:|---:|---|
+| Life | Level 4 → 5 | 10 | +10 percentage points | 0.5b | 10 × (price + 0.5b) |
+| Faith | Level 5 → 6 | 20 | +5 percentage points | 1b | 20 × (price + 1b) |
+
+Both caps, rates and current fees come from [Nexon's v271 Special Skill Ring Changes](https://www.nexon.com/maplestory/news/update/44597/v-271-maple-story-x-frieren-beyond-journey-s-end-patch-notes#SpecialSkillRingChanges). Life's prerequisite level and upgrade are documented in [v246](https://www.nexon.com/maplestory/news/update/5341/v-246-new-age-6th-job-patch-notes#special); Faith's in [v263](https://www.nexon.com/maplestory/news/update/31006/v-263-carcion-octo-fest-patch-notes#BossRewardImprovements). Historical fee schedules are superseded by v271.
+
+For either type, n stones cost C=n(s+f) with success p=n/M. Thus E[total]=C/p=M(s+f), SD[total]=M(s+f)√(1−p), and P(total≤B)=1−(1−p)^floor(B/C). Fixed-size retries follow a geometric distribution under the failure assumptions detailed below. Price changes the bill, not the recommended amount.
+
+At a hypothetical Life price of 2b, use 10 stones for a 25b total: 20b acquisition plus 5b fees. **No Life market sample was supplied.** All screenshot prices and the rest of the market analysis concern Faith. The UI retains the entered price when switching types and tells the user to enter their Life price. It does not reinterpret Faith listings as Life evidence.
+
+The full batch is not the unique mean minimizer and does not minimize every percentile. Faith 19 has exact P95 at 0.95 times the guaranteed cost, but P99 at 1.9 times it. Life 9 has exact P90 at 0.9 times the guaranteed cost, with P95 and P99 at 1.8 times it. These smaller batches can finish cheaply; they do not save on average.
+
+## Faith recommendation at the supplied market prices
 
 **Use 20 Grindstones of Faith together in one attempt. Budget about 260b mesos at the visible 12b asking prices.** This gives 100% success under the published GMS v271 rules. It is the smallest hard budget for a guaranteed upgrade and removes outcome variance without increasing expected cost at a constant stone price.
 
@@ -42,7 +57,7 @@ The [official September 9 completed-maintenance announcement](https://steamcommu
 
 The updated linear fee removes the old extra charge for larger batches. Some recently crawled wiki and guide pages still contain the old cap, fees and eligibility. A recent crawl date does not establish that a page reflects the patch. Current primary notes take precedence.
 
-## Exact statistical model
+## Exact statistical model: Faith example
 
 Let n be the stones used in each attempt, s their price in billions of mesos, p=n/20, and C=n(s+1) the cost of one attempt including the polishing fee.
 
@@ -142,11 +157,15 @@ With fixed nondecreasing marginal prices, buying beyond the cheap listings makes
 
 ## Verification and scope limits
 
-The JavaScript model is checked against independent arithmetic, quantile boundaries and exact snapshot totals. Two million seeded simulated completions across all 20 batch sizes agree with analytic means within six Monte Carlo standard errors and with the modeled 260b-budget success rates. The page’s visual experiment can run 10,000, 50,000 or 200,000 completed upgrades. It builds a histogram and a chronological running-average chart in chunks, and reports a normal-approximation interval for simulation mean noise. It does not measure uncertainty in Nexon’s rules. Each new experiment uses a new displayed seed. A separate playback shows every attempted polish until the first success, with cumulative costs; input changes cancel prior playback.
+The JavaScript model is checked against independent fraction arithmetic for all 30 legal Life and Faith strategies: means, standard deviations, median/P90/P95/P99, and success within the guaranteed total. Three million seeded completions across all 30 amounts agree with exact means within six Monte Carlo standard errors and with exact budget success rates.
 
-The independent Python verifier enumerates 4,095 finite compositions through 12 stones, checks the expected-cost identity and splitting inequality, solves a maximum-success budget recurrence through 80 stones, and verifies adaptive target-confidence examples using rational probabilities. It makes no network calls.
+The page automatically simulates 50,000 completed upgrades for each of four amounts: full maximum, one fewer, half maximum and one stone. Histograms retain all tail outcomes; running-average checkpoints preserve trial order. Exact calculations establish the mean tie and recommendation. Simulated sample means never choose the strategy. A separate four-lane animation shows attempts until success; changing type or price cancels old runs and restarts the comparison. The only calculator inputs are stone type and price.
 
-Excluded: buying or polishing the prerequisite level-5 ring; sale taxes and resale friction; future prices; borrowing costs; time value; boss acquisition schedules; personal drop rates; and inventory not shown. Tradable owned stones have a resale opportunity cost. Refunded world-bound stones instead compete with use on other eligible rings or characters. No cooldown or weekly limit on polishing attempts was found in the reviewed notes; none is invented by the model.
+Discrete sample percentiles need care at exact probability boundaries. At Faith 19, the true first-attempt CDF is exactly 95%. In a finite random sample, fewer than 95% may succeed immediately, moving the empirical P95 to a second attempt even though the exact P95 is one attempt. Life 9 has the analogous P99 boundary after two tries. The page explains this difference beside its simulated table.
+
+The independent Python verifier enumerates 4,095 finite compositions through 12 stones, checks the expected-cost identity and splitting inequality, solves a maximum-success budget recurrence through 80 Faith stones, verifies adaptive target-confidence examples using rational probabilities, and compares all 30 production Life/Faith strategies against fraction arithmetic. It makes no network calls.
+
+Excluded: buying the prerequisite ring (level 4 for Life or level 5 for Faith), or combining both upgrades; sale taxes and resale friction; future prices; borrowing costs; time value; boss acquisition schedules; personal drop rates; and inventory not shown. Tradable owned stones have a resale opportunity cost. Refunded world-bound stones instead compete with use on other eligible rings or characters. No cooldown or weekly limit on polishing attempts was found in the reviewed notes; none is invented by the model.
 
 ## Reusable research findings
 
@@ -160,8 +179,10 @@ This task uses a public static GitHub Pages deployment as explicitly requested. 
 
 For visual simulations, record running-average checkpoints in original trial order before aggregating a histogram or sorting for percentiles. Never select an optimum by the smallest simulated sample mean when the exact expectations tie. Keep every tail outcome in costs and bins, label any compressed playback, and cancel pending callbacks when parameters change.
 
+For calculators with an exact mean tie, select a policy using an explicit risk criterion, rather than asking the user to choose the optimization variable. When introducing a new item type, parameterize caps, fees, probabilities, upgrade levels and simulation accounting together. Keep market observations attached to their original item type. In a discrete distribution, empirical quantiles need not converge smoothly at a probability boundary; explain whole-attempt jumps rather than hiding them. Version every changed browser module import when deploying an incompatible interface update.
+
 ## Session record
 
 Verified released mechanics against rendered primary sources; transcribed six screenshots; derived and independently checked fixed and adaptive strategies; implemented a static calculator with charts and simulation; configured GitHub Actions to validate and publish the site. No earlier research journal was superseded.
 
-The follow-up revision centers the opening on price and lowest average completion cost, with the equal-average result stated directly. It adds animated single-upgrade playback and progressive multi-upgrade histogram and running-mean charts, plus interface tests for stopping and parameter changes.
+The current revision follows the Star Force calculator’s inputs → automatic policy → result tiles → visual comparisons structure. Type and price are the only calculator inputs. All legal amounts are evaluated automatically; exact mean and P95 curves, probability tables, four-lane animation, and automatic Monte Carlo explain the recommendation. Tests cover both types, invalid input hiding, cancellation, automatic restart, and unchanged Faith market evidence.

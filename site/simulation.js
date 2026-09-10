@@ -1,18 +1,18 @@
-import { strategy, seededRandom } from './model.js';
+import { strategy, seededRandom, validateBatch, rulesFor } from './model.js?v=3';
 
-export function rollAttempt(batch, random = Math.random) {
-  if (!Number.isInteger(batch) || batch < 1 || batch > 20) throw new RangeError('Batch must be 1–20.');
-  return random() < batch / 20;
+export function rollAttempt(type, batch, random = Math.random) {
+  validateBatch(type, batch);
+  return random() < batch / rulesFor(type).maxStones;
 }
 
-export function createUpgrade(batch, price) {
-  const rule = strategy(batch, price);
-  return { batch, price, attemptCost: rule.attemptCost, attempts: 0, stones: 0, cost: 0, success: false, outcomes: [] };
+export function createUpgrade(type, batch, price) {
+  const rule = strategy(type, batch, price);
+  return { type, batch, price, attemptCost: rule.attemptCost, attempts: 0, stones: 0, cost: 0, success: false, outcomes: [] };
 }
 
 export function advanceUpgrade(run, random = Math.random) {
   if (run.success) return run;
-  run.success = rollAttempt(run.batch, random);
+  run.success = rollAttempt(run.type, run.batch, random);
   run.attempts++;
   run.stones = run.attempts * run.batch;
   run.cost = run.attempts * run.attemptCost;
@@ -23,9 +23,11 @@ export function advanceUpgrade(run, random = Math.random) {
 // Each sample is a completed upgrade. Histograms retain every unlucky outcome.
 // Checkpoints are recorded in trial order, before any percentile aggregation.
 export class UpgradeExperiment {
-  constructor(batch, price, trials = 50000, seed = 2712026) {
-    const rule = strategy(batch, price);
+  constructor(type, batch, price, trials = 50000, seed = 2712026) {
+    const rule = strategy(type, batch, price);
     if (!Number.isInteger(trials) || trials < 1 || trials > 1000000) throw new RangeError('Use 1–1,000,000 completed upgrades.');
+    this.type = type;
+    this.maxStones = rulesFor(type).maxStones;
     this.batch = batch;
     this.price = price;
     this.target = trials;
@@ -49,7 +51,7 @@ export class UpgradeExperiment {
     const end = Math.min(this.target, this.completed + count);
     while (this.completed < end) {
       let attempts = 1;
-      while (!rollAttempt(this.batch, this.random)) attempts++;
+      while (!rollAttempt(this.type, this.batch, this.random)) attempts++;
       const value = attempts * this.attemptCost;
       this.completed++;
       this.totalAttempts += attempts;
@@ -58,8 +60,8 @@ export class UpgradeExperiment {
       this.mean += delta / this.completed;
       this.m2 += delta * (value - this.mean);
       // Integer stone counts avoid price-related floating-point equality errors.
-      if (attempts * this.batch < 20) this.below++;
-      else if (attempts * this.batch === 20) this.equal++;
+      if (attempts * this.batch < this.maxStones) this.below++;
+      else if (attempts * this.batch === this.maxStones) this.equal++;
       else this.above++;
       if (this.completed % this.checkpointInterval === 0 || this.completed === this.target) {
         this.checkpoints.push({ runs: this.completed, mean: this.mean });

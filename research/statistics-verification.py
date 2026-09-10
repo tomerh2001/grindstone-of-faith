@@ -8,6 +8,7 @@ from fractions import Fraction
 from functools import lru_cache
 from math import ceil, log1p, sqrt, isclose
 import json
+import subprocess
 from pathlib import Path
 
 N = 20
@@ -147,8 +148,46 @@ def verify():
         assert cost >= sum(ladder[:20])
     return plans_checked, optimizer_results
 
+def verify_current_types():
+    """Compare the production JavaScript against exact fractions for both types."""
+    script = """import { analyze } from './site/model.js';
+    console.log(JSON.stringify(['faith','life'].map(type => {
+      const price = type === 'faith' ? 12 : 2;
+      return { type, price, ...analyze(type,price) };
+    })));"""
+    actual = json.loads(subprocess.check_output(
+        ['node', '--input-type=module', '-e', script],
+        cwd=Path(__file__).resolve().parent.parent, text=True))
+    records = []
+    for scenario in actual:
+        maximum = 20 if scenario['type'] == 'faith' else 10
+        fee = Fraction(1) if maximum == 20 else Fraction(1,2)
+        price = Fraction(scenario['price'])
+        total = maximum * (price + fee)
+        for row in scenario['strategies']:
+            n = row['n']
+            p = Fraction(n, maximum)
+            failure = 1-p
+            cost = n*(price+fee)
+            assert row['expectedCost'] == float(total)
+            assert row['attemptCost'] == float(cost)
+            assert isclose(row['budgetSuccess'], float(1-failure**(maximum//n)), abs_tol=1e-12)
+            assert isclose(row['standardDeviation'], float(total)*sqrt(float(failure)), abs_tol=1e-10)
+            for key,q in [('median',Fraction(1,2)),('p90',Fraction(9,10)),('p95',Fraction(19,20)),('p99',Fraction(99,100))]:
+                k = 1
+                while 1-failure**k < q:
+                    k += 1
+                assert row[key] == float(k*cost), (scenario['type'],n,key)
+        assert scenario['recommended']['n'] == maximum
+        records.append({'type':scenario['type'], 'price_b':float(price),
+                        'price_context':'Faith screenshot scenario' if maximum == 20 else 'illustrative user-input scenario; no Life market sample',
+                        'max_stones':maximum, 'fee_per_stone_b':float(fee),
+                        'rows':scenario['strategies']})
+    return records
+
 if __name__ == '__main__':
     plans_checked, optimizer_results = verify()
+    current_types = verify_current_types()
     table=[]
     for n in range(1, 21):
         r = Fraction(N-n,N)
@@ -167,8 +206,9 @@ if __name__ == '__main__':
                             'no_pity':'model assumption',
                             'ring_after_failure':'assumed unchanged and eligible to retry'},
               'fixed_batch_table':table,
+              'current_type_tables':current_types,
               'verification':{'all_compositions_up_to_12_stones':plans_checked,
-                              'confidence_budget_dp_cap':80,'status':'passed'},
+                              'confidence_budget_dp_cap':80,'production_strategies_verified_with_fractions':30,'status':'passed'},
               'exact_optimization_examples':optimizer_results}
     def encode(x):
         if isinstance(x,Fraction):

@@ -1,85 +1,95 @@
-import { strategy, successWithin, recommendedBatch, purchaseCost, formatProbability } from './model.js';
-import { SimulationView } from './simulation-view.js';
+import { analyze, strategy, successWithin, purchaseCost, formatProbability } from './model.js?v=3';
+import { SimulationView } from './simulation-view.js?v=3';
 
 const $ = id => document.getElementById(id);
 const money = (v, digits = 1) => Number.isFinite(v) ? `${v.toLocaleString('en-US', { maximumFractionDigits: digits })}b` : 'No finite limit';
 const pct = formatProbability;
 const integer = v => v.toLocaleString('en-US');
-const state = { price: 12, confidence: 100, budget: 260, batch: 5, trials: 50000, purchaseCount: 20, market: 'active' };
-let market = null;
-const simulations = new SimulationView(() => state);
-const COLORS = { custom: '#b9a1ff', nineteen: '#f3cc84', guarantee: '#74eed0' };
-
+const state = { type: 'faith', price: 12, purchaseCount: 20, market: 'active' };
+const params = new URLSearchParams(location.search);
+if (['faith', 'life'].includes(params.get('type'))) state.type = params.get('type');
+if (params.has('price') && params.get('price').trim() && Number.isFinite(Number(params.get('price'))) && Number(params.get('price')) >= 0 && Number(params.get('price')) <= 1e6) state.price = Number(params.get('price'));
+$('type').value = state.type; $('price').value = state.price;
+let market = null, result = analyze(state.type, state.price);
+const simulations = new SimulationView(() => ({ ...state, analysis: result }));
+const PALETTE = ['#74eed0', '#f3cc84', '#b9a1ff', '#76b9f7'];
+const COLORS = { custom: PALETTE[2], guarantee: PALETTE[0] };
 function frame(label, width = 720, height = 320) {
   return `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${label}"><title>${label}</title>`;
 }
+function chartSize(id) { return Math.max(340, Math.round($(id).clientWidth || 900)); }
+function legend() {
+  return result.comparisons.map((s, i) => `<span style="--key:${PALETTE[i]}">${s.n} / attempt${i === 0 ? ' · recommended' : ''}</span>`).join('');
+}
+function efficiencyChart() {
+  const { strategies, recommended, rules } = result;
+  const W = chartSize('efficiencyChart'), H = 300, left = 65, right = 23, top = 25, bottom = 52;
+  const ymax = Math.max(...strategies.map(s => s.p95)) * 1.13;
+  const X = n => left + (n - 1) / (rules.maxStones - 1) * (W - left - right);
+  const Y = v => H - bottom - v / ymax * (H - top - bottom);
+  let svg = frame('Exact mean and 95th percentile of total upgrade cost for every legal stone amount', W, H);
+  for (let i = 0; i <= 3; i++) {
+    const v = ymax * i / 3;
+    svg += `<line class="grid" x1="${left}" x2="${W-right}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${left-8}" y="${Y(v)+4}" text-anchor="end">${money(v, 0)}</text>`;
+  }
+  for (const [key, color] of [['p95', PALETTE[1]], ['expectedCost', PALETTE[0]]]) {
+    svg += `<path class="line" stroke="${color}" d="${strategies.map((s, i) => `${i ? 'L' : 'M'} ${X(s.n)} ${Y(s[key])}`).join(' ')}"/>`;
+    for (const s of strategies) svg += `<circle cx="${X(s.n)}" cy="${Y(s[key])}" r="${s.n === rules.maxStones ? 6 : 4}" fill="${color}" tabindex="0"><title>${s.n} stones: average ${money(s.expectedCost, 3)}, P95 ${money(s.p95, 3)}, success per attempt ${pct(s.p)}</title></circle>`;
+  }
+  const ticks = W < 550 ? [1, rules.maxStones/2, rules.maxStones] : strategies.map(s => s.n);
+  for (const n of ticks) svg += `<text x="${X(n)}" y="${H-28}" text-anchor="middle">${n}</text>`;
+  svg += `<text x="${W/2}" y="${H-4}" text-anchor="middle">Stones per attempt · total cost in b mesos</text></svg>`;
+  $('efficiencyChart').innerHTML = svg;
+  $('efficiencyNote').textContent = `The average stays at ${money(recommended.expectedCost, 2)} for every amount. ${rules.maxStones} stones also has zero spread. ${state.type === 'faith' ? '19 Faith has a lower P95 because 95% of attempts succeed immediately; its 5% retry risk keeps the average unchanged.' : 'Some smaller amounts have cheaper lucky outcomes; their retry tails keep the average unchanged.'}`;
+}
 function cdfChart() {
-  const custom = strategy(state.batch, state.price, state.budget), mean = custom.expectedCost;
-  const xmax = Math.max(mean * 1.35, Math.min(Math.max(custom.p99, state.budget), mean * 4.5));
-  const W = 720, H = 320, left = 52, right = 18, top = 22, bottom = 53;
-  const X = v => left + v / xmax * (W - left - right), Y = v => H - bottom - v * (H - top - bottom);
-  let svg = frame('Cumulative probability of success versus total budget, comparing your selected batch, 19 stones, and 20 stones');
-  for (const p of [0, .25, .5, .75, 1]) {
-    svg += `<line class="grid" x1="${left}" x2="${W - right}" y1="${Y(p)}" y2="${Y(p)}"/><text x="${left - 8}" y="${Y(p) + 5}" text-anchor="end">${pct(p, 0)}</text>`;
-  }
-  for (let i = 0; i <= 4; i++) {
-    const cost = xmax * i / 4;
-    svg += `<text x="${X(cost)}" y="${H - 28}" text-anchor="${i === 4 ? 'end' : 'middle'}">${money(cost, 0)}</text>`;
-  }
-  svg += `<text x="${W / 2}" y="${H - 3}" text-anchor="middle">Available spending · billions of mesos</text>`;
-  for (const [n, color, name] of [[state.batch, COLORS.custom, 'Selected batch'], [19, COLORS.nineteen, '19 stones'], [20, COLORS.guarantee, '20 stones']]) {
-    const s = strategy(n, state.price, state.budget);
+  const G = result.recommended.expectedCost, W = chartSize('cdfChart'), H = 300;
+  const left = 60, right = 24, top = 20, bottom = 52, xmax = G * 3;
+  const X = v => left + v/xmax*(W-left-right), Y = p => H-bottom-p*(H-top-bottom);
+  let svg = frame('Probability of finishing within a total spending amount for four automatically compared strategies', W, H);
+  for (const p of [0,.25,.5,.75,1]) svg += `<line class="grid" x1="${left}" x2="${W-right}" y1="${Y(p)}" y2="${Y(p)}"/><text x="${left-8}" y="${Y(p)+4}" text-anchor="end">${pct(p,0)}</text>`;
+  for (let i=0;i<=3;i++) svg += `<text x="${X(i*G)}" y="${H-28}" text-anchor="${i===3?'end':'middle'}">${money(i*G,1)}</text>`;
+  // Draw guarantee last so its 100% jump remains visible.
+  for (const s of [...result.comparisons].reverse()) {
+    const index = result.comparisons.indexOf(s);
     let d = `M ${X(0)} ${Y(0)}`;
-    const maxAttempts = Math.floor(xmax / s.attemptCost);
-    for (let k = 1; k <= maxAttempts; k++) {
-      d += ` H ${X(k * s.attemptCost)} V ${Y(successWithin(n, k))}`;
-      if (n === 20) break;
+    for (let k=1;k<=Math.floor(xmax/s.attemptCost+1e-12);k++) {
+      d += ` H ${X(k*s.attemptCost)} V ${Y(successWithin(state.type,s.n,k))}`;
+      if (s.p===1) break;
     }
-    d += ` H ${X(xmax)}`;
-    svg += `<path class="line" stroke="${color}" ${n === 19 ? 'stroke-dasharray="6 4"' : ''} d="${d}"><title>${name}: ${pct(s.p)} per attempt, ${money(s.attemptCost)} per attempt</title></path>`;
+    svg += `<path class="line" stroke="${PALETTE[index]}" d="${d} H ${X(xmax)}"><title>${s.n} stones per attempt</title></path>`;
   }
-  if (state.budget <= xmax) {
-    const x = X(state.budget);
-    svg += `<line x1="${x}" x2="${x}" y1="${top}" y2="${H - bottom}" stroke="#9baac0" stroke-dasharray="3 6"/><text x="${Math.min(x + 7, W - 120)}" y="${top + 15}">Your limit</text>`;
-  }
-  $('cdfChart').innerHTML = svg + '</svg>';
-  $('customLegend').textContent = `${state.batch} per attempt`;
+  svg += `<text x="${W/2}" y="${H-3}" text-anchor="middle">Total spending available · billions of mesos</text></svg>`;
+  $('cdfChart').innerHTML = svg;
+  $('cdfLegend').innerHTML = legend();
 }
-
 function render() {
-  const n = recommendedBatch(state.confidence / 100), selected = strategy(state.batch, state.price, state.budget);
-  const recommendation = strategy(n, state.price, state.budget), gap = recommendation.attemptCost - state.budget;
-  $('confidenceValue').textContent = `${state.confidence}%`;
-  $('batchValue').textContent = `${state.batch} stones · ${pct(selected.p)}`;
-  $('bestAverage').textContent = money(selected.expectedCost, 2);
-  $('averageBreakdown').textContent = `${money(20 * state.price, 2)} in stones + 20b in fees`;
-  $('selectedSummary').innerHTML = `${state.batch} <em>per attempt</em>`;
-  $('selectedSummaryDetail').textContent = `${money(selected.attemptCost, 2)} each try · ${pct(selected.p)} success`;
-  $('tieExplanation').textContent = `At ${money(state.price, 2)} per stone, every batch averages ${money(selected.expectedCost, 2)} to finish: 20 stones plus 20b in fees. Changing the price changes this total, but all 1–20 amounts still tie.`;
-  $('targetAnswer').textContent = `${n} stones together: ${money(recommendation.attemptCost, 2)} upfront for ${pct(recommendation.p)} success (${pct(1 - recommendation.p)} failure risk).`;
-  $('budgetStatus').classList.toggle('warn', gap > 1e-9);
-  const affordable = Math.max(0, Math.min(20, Math.floor(state.budget / (state.price + 1) + 1e-12)));
-  $('budgetStatus').textContent = gap > 1e-9
-    ? `Your optional limit is ${money(gap, 2)} short. It funds ${affordable} stones together for ${pct(affordable / 20)} success.`
-    : `Fits your optional limit${Math.abs(gap) < 1e-9 ? ' exactly' : ` with ${money(-gap, 2)} to spare`}.`;
-  $('attemptCost').textContent = money(selected.attemptCost, 2);
-  $('expectedCost').textContent = money(selected.expectedCost, 2);
-  $('p95Cost').textContent = money(selected.p95, 2);
-  $('p99Cost').textContent = money(selected.p99, 2);
-  $('budgetLabel').textContent = money(state.budget, 2);
-  const uncertain = selected.n < 20 && selected.budgetAttempts > 0;
-  $('budgetChance').textContent = pct(selected.budgetSuccess, 2, uncertain);
-  $('budgetProgress').style.width = `${selected.budgetSuccess * 100}%`;
-  $('budgetExplanation').textContent = `${integer(selected.budgetAttempts)} affordable attempt${selected.budgetAttempts === 1 ? '' : 's'}, stopping at success. ${pct(1 - selected.budgetSuccess, 2, uncertain)} chance of stopping without the upgrade after all affordable attempts.${state.batch === 20 && selected.budgetAttempts > 0 ? ' Only one attempt is needed.' : ''}`;
-  $('strategyTable').innerHTML = Array.from({ length: 20 }, (_, i) => strategy(i + 1, state.price, state.budget)).map(s =>
-    `<tr class="${s.n === 20 ? 'guarantee' : s.n === state.batch ? 'selected' : ''}"><td><button data-batch="${s.n}" aria-label="Explore ${s.n} stones per attempt" aria-pressed="${s.n === state.batch}">${s.n}${s.n === 20 ? ' · guarantee' : ''}</button></td><td>${pct(s.p)}</td><td>${money(s.attemptCost, 2)}</td><td>${money(s.expectedCost, 2)}</td><td>${money(s.median, 2)}</td><td>${money(s.p95, 2)}</td><td>${money(s.p99, 2)}</td><td>${pct(s.budgetSuccess, 2, s.n < 20 && s.budgetAttempts > 0)}</td></tr>`).join('');
-  $('cappedExplanation').textContent = `For your selected ${state.batch}-stone batch and ${money(state.budget)} cap, expected spending before success or stopping is ${money(selected.expectedCappedSpend, 2)}, with ${pct(selected.budgetSuccess, 2, uncertain)} final success. This lower capped average must not be confused with the ${money(selected.expectedCost, 2)} average needed to finish when continuing until success.`;
-  document.querySelectorAll('[data-price]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.price) === state.price));
-  document.querySelectorAll('[data-confidence]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.confidence) === state.confidence));
-  document.querySelectorAll('[data-batch]').forEach(b => b.setAttribute('aria-pressed', Number(b.dataset.batch) === state.batch));
-  cdfChart();
+  result = analyze(state.type, state.price);
+  const { rules: r, recommended: best, strategies } = result, M = r.maxStones, G = best.expectedCost;
+  $('feeNote').textContent = `Fee: +${money(r.feePerStone)} per stone · included automatically · level ${r.from} → ${r.to} only`;
+  $('priceNote').textContent = state.type === 'life' ? 'Enter your Life price. The price field is retained when switching types; no Life market sample was supplied.' : 'Faith screenshot reference: roughly 12b per stone. Enter your actual purchase price.';
+  $('averageVerdict').textContent = `Use ${M} ${r.name} in one attempt.`;
+  $('averageExplanation').textContent = `It costs ${money(G, 3)} in total and guarantees the upgrade. This is also the lowest average cost at your entered price.`;
+  $('bestAverage').textContent = money(G, 3);
+  $('averageBreakdown').textContent = `${money(M*state.price, 3)} in stones + ${money(M*r.feePerStone)} in fees`;
+  $('bestBatch').innerHTML = `${M} <em>per attempt</em>`;
+  $('bestPercentiles').textContent = money(G, 3);
+  $('tieExplanation').textContent = `All amounts from 1 to ${M} tie at ${money(G, 3)} on average when repeated until success. The full amount wins the tie on certainty: no retry, no overspend. Changing the price changes the total, not the recommended amount.`;
+  $('policyFrom').textContent = `Level ${r.from}`;
+  $('policyTo').textContent = `Level ${r.to}`;
+  $('policyAction').textContent = `${M} ${r.name} · 100% success`;
+  $('stoneMeter').style.gridTemplateColumns = `repeat(${M},1fr)`;
+  $('stoneMeter').innerHTML = '<span class="on"></span>'.repeat(M);
+  $('formula').innerHTML = `Cost per try = n × (${money(state.price,3)} + ${money(r.feePerStone)})<br>Success per try = n / ${M}<br>Average = cost ÷ success = ${money(G,3)}`;
+  $('formulaExplanation').textContent = `The amount n cancels out. Every strategy averages ${M} ${r.name} and ${money(M*r.feePerStone)} in fees per completed upgrade.`;
+  $('splitComparison').innerHTML = [[1,M],[2,M/2],[M,1]].map(([tries,n]) => `<div><b>${tries} × ${n} stones</b><strong>${pct(successWithin(state.type,n,tries))}</strong><span>Within ${M} stones spent</span></div>`).join('');
+  $('strategyTable').innerHTML = strategies.map(s => `<tr class="${s.n===M?'guarantee':''}"><td>${s.n}${s.n===M?' · recommended':''}</td><td>${pct(s.p)}</td><td>${money(s.attemptCost,3)}</td><td>${money(s.expectedCost,3)}</td><td>${money(s.median,3)}</td><td>${money(s.p95,3)}</td><td>${money(s.p99,3)}</td><td>${pct(1-s.budgetSuccess)}</td></tr>`).join('');
+  const budgets = [.5,1,1.5,2].map(mult => G*mult);
+  $('probabilityCaption').textContent = 'P(total cost ≤ amount) when retrying until success';
+  $('probabilityHead').innerHTML = `<tr><th>Stones / attempt</th>${budgets.map(b=>`<th>≤ ${money(b,3)}</th>`).join('')}</tr>`;
+  $('probabilityTable').innerHTML = result.comparisons.map(s=>`<tr class="${s.n===M?'guarantee':''}"><td>${s.n}${s.n===M?' · recommended':''}</td>${budgets.map(b=>{const t=strategy(state.type,s.n,state.price,b);return `<td>${pct(t.budgetSuccess,2,t.p<1&&t.budgetAttempts>0)}</td>`;}).join('')}</tr>`).join('');
+  efficiencyChart(); cdfChart();
 }
-
 function activeRows() {
   return market.rows.filter(r => r.kind === 'active_ask').map(r => ({ ...r, unitPriceMesos: r.unit_price_mesos }));
 }
@@ -114,52 +124,27 @@ function renderMarket() {
   document.querySelectorAll('[data-market]').forEach(b => b.setAttribute('aria-pressed', b.dataset.market === state.market));
 }
 
-function renderSources() {
-  const current = 'https://www.nexon.com/maplestory/news/update/44597/v-271-maple-story-x-frieren-beyond-journey-s-end-patch-notes#SpecialSkillRingChanges';
-  const old = 'https://www.nexon.com/maplestory/news/update/31006/v-263-carcion-octo-fest-patch-notes#BossRewardImprovements';
-  $('mechanicsEvidence').innerHTML = `<p class="eyebrow muted">VERIFIED AGAINST NEXON’S CURRENT GMS NOTES</p><h3>One eligible level-5 ring. Up to 20 stones.</h3><p>Faith polishes an untradable level-5 <strong>Ring of Restraint or Continuous Ring</strong> to level 6. The September 9 update raised the cap from 5 stones to 20 and made the polishing fee linear. Each stone contributes 5 percentage points and costs 1b in fees. <a href="${current}">GMS v271 ↗</a></p><div class="table-scroll mechanics-table"><table><caption class="sr-only">Changes to the Faith polishing fee</caption><thead><tr><th>Stones</th><th>Success</th><th>Old fee</th><th>Current fee</th></tr></thead><tbody>${[[1,1],[2,2],[3,4],[4,7],[5,10],[10,null],[19,null],[20,null]].map(([n,oldFee]) => `<tr><td>${n}</td><td>${n * 5}%</td><td>${oldFee === null ? 'Unavailable' : money(oldFee)}</td><td>${money(n)}</td></tr>`).join('')}</tbody></table></div><p class="small">The old fee schedule comes from <a href="${old}">GMS v263</a>. Recently crawled wiki pages can still show that obsolete table.</p><h3>Check compensation before buying.</h3><p>The patch removed polishing for Weapon Jump S/D/I/L, Risk Taker, Totalling, and Critical Damage rings. Qualifying pre-update level-6 rings receive <strong>20 Faith + 10 Life + 25b</strong> after being reduced to level 4; level-5 rings receive 10 Life + 5b. Claim through the Rewards System by September 8, 2027, 23:59 UTC. Interactive refund stones are permanent and bound within world. <a href="${current}">Eligibility and refunds ↗</a></p><p>For an existing eligible polished ring, a polish-level swap costs 50m until its planned removal in November 2026. A swap moves the upgrade; it does not create another one. <a href="${current}">Swap change ↗</a></p>`;
-  const sources = [
-    [current, 'Nexon · GMS v271 patch notes', 'Published September 8; updated September 9, 2026. Current cap, rate, fee, eligibility, compensation and swap changes.'],
-    [old, 'Nexon · GMS v263 patch notes', 'Historical primary source. Faith’s original level-5 to level-6 upgrade and superseded five-stone fee table.'],
-    ['https://www.nexon.com/maplestory/news/update/5341/v-246-new-age-6th-job-patch-notes#special', 'Nexon · GMS v246 patch notes', 'Original untradable-ring polishing requirement. Its old costs are not used for the current calculator.'],
-    ['https://steamcommunity.com/gid/103582791433474083/announcements/detail/707782088403716435', 'Nexon · September 9 maintenance completed', 'Official publisher announcement confirms the update went live, with client v271.1.2.'],
-    ['./market.json', 'Your six Auction House screenshots · transcribed data', 'All 54 visible rows, quantities, unit prices, dates, page numbers and limitations. Original account screenshots remain private.'],
-    ['https://github.com/tomerh2001/grindstone-of-faith/tree/main/research', 'Reproducible statistical analysis', 'Analytic distributions, independent exact-arithmetic verification, simulation checks and the dated research record.']
-  ];
-  $('sources').innerHTML = sources.map(([url, title, detail]) => `<div class="source"><a href="${url}">${title} ↗</a><p>${detail}</p></div>`).join('');
-}
-
 function updateInputs() {
-  const names = ['price', 'confidence', 'budget', 'batch'];
-  if (names.some(id => $(id).value === '' || !$(id).checkValidity() || !Number.isFinite($(id).valueAsNumber))) {
-    $('inputError').textContent = 'Use a price of 0–1,000b, a whole batch of 1–20 stones, and a budget of 0–1,000,000b. Results retain the last valid settings.';
-    simulations.reset(); simulations.setValid(false);
+  const price = $('price').valueAsNumber;
+  if ($('price').value === '' || !$('price').checkValidity() || !Number.isFinite(price) || !['faith','life'].includes($('type').value)) {
+    $('inputError').textContent = 'Enter a price from 0 to 1,000,000b to calculate.';
+    $('price').setAttribute('aria-invalid','true');
+    $('results').hidden = true; $('analysisContent').hidden = true;
+    simulations.reset(false);
     return;
   }
-  const changed = state.price !== $('price').valueAsNumber || state.batch !== $('batch').valueAsNumber || state.trials !== Number($('trials').value);
-  names.forEach(id => { state[id] = $(id).valueAsNumber; });
-  state.trials = Number($('trials').value);
-  if (changed) simulations.reset();
-  simulations.setValid(true);
-  $('inputError').textContent = '';
-  render();
+  state.type = $('type').value; state.price = price;
+  $('inputError').textContent = ''; $('price').removeAttribute('aria-invalid');
+  $('results').hidden = false; $('analysisContent').hidden = false;
+  render(); simulations.reset();
+  const url = new URL(location.href); url.searchParams.set('type',state.type); url.searchParams.set('price',state.price);
+  history.replaceState(null,'',url);
 }
-for (const id of ['price', 'confidence', 'budget', 'batch', 'trials']) $(id).addEventListener('input', updateInputs);
-document.addEventListener('click', event => {
-  const button = event.target.closest('button');
-  if (!button) return;
-  for (const key of ['price', 'confidence', 'batch']) {
-    if (button.dataset[key] !== undefined) {
-      $(key).value = Number(button.dataset[key]);
-      updateInputs(); return;
-    }
-  }
-  if (button.dataset.market) { state.market = button.dataset.market; renderMarket(); }
-});
-$('purchaseCount').addEventListener('input', e => { state.purchaseCount = e.target.valueAsNumber; renderPurchase(); });
-renderSources();
-render();
-simulations.reset();
+for (const id of ['type','price']) $(id).addEventListener('input', updateInputs);
+document.addEventListener('click', e=>{ const b=e.target.closest('[data-market]'); if(b){ state.market=b.dataset.market;renderMarket(); } });
+$('purchaseCount').addEventListener('input',e=>{state.purchaseCount=e.target.valueAsNumber;renderPurchase();});
+window.addEventListener('resize',()=>{if(!$('analysisContent').hidden){efficiencyChart();cdfChart();} if(market)renderPurchase();});
+render(); simulations.reset();
 try {
   const response = await fetch('./market.json');
   if (!response.ok) throw new Error(`Market data unavailable (${response.status})`);

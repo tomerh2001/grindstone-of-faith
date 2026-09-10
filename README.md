@@ -1,12 +1,17 @@
-# Faith Lab
+# Grindstone Lab · Life & Faith
 
-[Open the Grindstone of Faith planner](https://tomerh2001.github.io/grindstone-of-faith/)
+[Open the grindstone optimizer](https://tomerh2001.github.io/grindstone-of-faith/)
 
-**All batch sizes from 1 to 20 tie for lowest average spending when repeated until success. Use 20 per attempt as the practical recommendation: it achieves that average with no retry risk.** At approximately 12b per stone, every batch averages 240b in stones plus 20b in polishing fees, or 260b total. This uses the GMS v271 rules released September 9, 2026, for eligible untradable level-5 Rings of Restraint and Continuous Rings.
+**Enter the grindstone type and its price. The calculator recommends 20 Faith or 10 Life per attempt automatically.** Under GMS v271's linear fees, every legal amount ties for lowest average completion cost. The full amount also guarantees success and removes retry variance.
 
-Nineteen stones cost about 247b for 95% success. Smaller batches repeated until success have the same 260b expected cost at a constant stone price, but substantially larger unlucky costs. Repeat calculations assume independent outcomes, full material and fee consumption on failure, no pity, and an unchanged level-5 ring. The published 20-stone guarantee needs no assumptions about repeat failures.
+- Faith, level 5 → 6: total = 20 × (stone price + 1b). At 12b per stone, that is 260b.
+- Life, level 4 → 5: total = 10 × (stone price + 0.5b). No Life market price was supplied; enter your own.
 
-The opening has simple price, comparison-batch and simulation-size inputs, followed by the average-cost answer. Watch one upgrade attempt by attempt, or run 10,000, 50,000 or 200,000 complete upgrades while the histogram and chronological running mean fill in. Simulation results never choose the optimal batch; the exact mean establishes the tie. The site also retains all 20 strategies, optional budget and confidence targets, a finite supply calculator, all 54 screenshot rows and linked research. It uses no external runtime dependencies, analytics or accounts. The original screenshots and account information are not published.
+The opening has exactly two inputs, followed by the recommended policy, average cost, fee breakdown, outcome percentiles, and overspend probability. Exact graphs compare every legal amount. Four automatic comparisons (maximum, one fewer, half maximum, and one stone) drive animated upgrades and 50,000 simulations per strategy. Simulations populate automatically after input changes and can be stopped or rerun. Links retain the type and price.
+
+Retry calculations assume independent attempts, all stones and fees consumed on failure, unchanged ring eligibility and no pity. The published full-batch guarantee does not depend on retry assumptions. Smaller batches can have lower medians or some lower percentiles without lowering the mean. Sample percentiles may jump by one attempt at exact probability boundaries; the site explains this beside the simulation results.
+
+All 54 screenshot rows and the finite supply calculator remain explicitly **Faith-only**. The site has no external runtime dependencies, analytics or accounts. Original screenshots and account information are not published.
 
 ## Evidence
 
@@ -31,9 +36,9 @@ python3 research/statistics-verification.py
 python3 -m http.server 8000 --directory site
 ```
 
-JavaScript tests check exact boundaries, all 20 strategies, 54 transcribed rows, supply totals and two million simulated completed upgrades. Independent rational arithmetic verifies 4,095 finite attempt sequences, a maximum-success budget recurrence through 80 stones, and adaptive strategy examples.
+JavaScript tests check exact boundaries, all 30 Life/Faith strategies, 54 transcribed rows, supply totals and three million simulated completed upgrades. The Python verifier also compares the production JavaScript against exact fractions for both types. Independent rational arithmetic verifies 4,095 finite attempt sequences, a maximum-success budget recurrence through 80 stones, and adaptive strategy examples.
 
-Interface tests also verify animated attempts, instant completion, live histogram and running-mean updates, stopping, restarting, input-change cancellation and market tabs.
+The 22 tests include interface checks for two-input automatic recommendations, both upgrade types, animated lanes, instant completion, automatic progressive charts, stopping, restarting, input-change cancellation, hidden stale results after invalid input, and Faith market tabs.
 
 GitHub Actions runs these checks and publishes only `site/` to GitHub Pages. Deployments use the configured `github-pages` environment. The browser recomputes exact results locally; simulations illustrate the same model.
 
