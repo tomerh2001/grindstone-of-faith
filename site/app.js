@@ -1,5 +1,5 @@
-import { analyze, strategy, successWithin, purchaseCost, formatProbability } from './model.js?v=3';
-import { SimulationView } from './simulation-view.js?v=3';
+import { analyze, strategy, successWithin, purchaseCost, formatProbability } from './model.js?v=4';
+import { SimulationView } from './simulation-view.js?v=4';
 
 const $ = id => document.getElementById(id);
 const money = (v, digits = 1) => Number.isFinite(v) ? `${v.toLocaleString('en-US', { maximumFractionDigits: digits })}b` : 'No finite limit';
@@ -68,13 +68,16 @@ function render() {
   const { rules: r, recommended: best, strategies } = result, M = r.maxStones, G = best.expectedCost;
   $('feeNote').textContent = `Fee: +${money(r.feePerStone)} per stone · included automatically · level ${r.from} → ${r.to} only`;
   $('priceNote').textContent = state.type === 'life' ? 'Enter your Life price. The price field is retained when switching types; no Life market sample was supplied.' : 'Faith screenshot reference: roughly 12b per stone. Enter your actual purchase price.';
-  $('averageVerdict').textContent = `Use ${M} ${r.name} in one attempt.`;
-  $('averageExplanation').textContent = `It costs ${money(G, 3)} in total and guarantees the upgrade. This is also the lowest average cost at your entered price.`;
+  $('averageVerdict').textContent = `All 1–${M} amounts tie on average.`;
+  $('averageExplanation').textContent = `Every amount averages ${money(G, 3)} to finish. Use ${M} ${r.name} together if you want to lock in that cost with 100% success.`;
   $('bestAverage').textContent = money(G, 3);
   $('averageBreakdown').textContent = `${money(M*state.price, 3)} in stones + ${money(M*r.feePerStone)} in fees`;
   $('bestBatch').innerHTML = `${M} <em>per attempt</em>`;
   $('bestPercentiles').textContent = money(G, 3);
   $('tieExplanation').textContent = `All amounts from 1 to ${M} tie at ${money(G, 3)} on average when repeated until success. The full amount wins the tie on certainty: no retry, no overspend. Changing the price changes the total, not the recommended amount.`;
+  $('riskAlternativeTitle').textContent = `Prefer a chance to finish cheaper? ${M-1} ${r.name} gives ${pct((M-1)/M)}.`;
+  const near = strategies[M-2];
+  $('riskAlternative').textContent = `${pct(near.p)} finish for ${money(near.attemptCost,3)} on the first try. The remaining ${pct(1-near.p)} spend at least ${money(2*near.attemptCost,3)} if they continue with the same amount. Its average is still ${money(G,3)}. This is a tradeoff between frequent savings and occasional bigger bills.`;
   $('policyFrom').textContent = `Level ${r.from}`;
   $('policyTo').textContent = `Level ${r.to}`;
   $('policyAction').textContent = `${M} ${r.name} · 100% success`;
@@ -159,4 +162,14 @@ try {
   $('marketTable').innerHTML = '<tr><td colspan="6">Market evidence unavailable.</td></tr>';
   $('purchaseCount').disabled = true;
   console.error(error);
+}
+
+try {
+  const response=await fetch('./independent-monte-carlo.json');
+  if(!response.ok)throw new Error('Audit data unavailable');
+  const audit=await response.json();
+  $('auditFinding').textContent=`Recorded audit: ${integer(audit.total_completed_upgrades)} completed upgrades and ${integer(audit.total_rng_draws)} random attempt rolls. Faith price: 12b; Life price: illustrative 2b. This table retains those fixed audit prices when you change the calculator inputs.`;
+  $('auditTable').innerHTML=audit.results.map(r=>`<tr class="${r.batch===r.cap?'guarantee':''}"><td>${r.type==='faith'?'Faith':'Life'} · ${r.batch}</td><td>${money(r.observed_mean_b,3)}</td><td>${money(r.mean_ci95_low_b,3)}–${money(r.mean_ci95_high_b,3)}</td><td>${pct(r.below_guarantee_fraction,3)}</td><td>${pct(r.above_guarantee_fraction,3)}</td></tr>`).join('');
+} catch {
+  $('auditFinding').textContent='The independent audit table could not load. Use the downloadable results or simulator source links below.';
 }

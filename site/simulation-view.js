@@ -1,5 +1,5 @@
-import { createUpgrade, advanceUpgrade, UpgradeExperiment } from './simulation.js?v=3';
-import { seededRandom, formatProbability } from './model.js?v=3';
+import { createUpgrade, advanceUpgrade, UpgradeExperiment } from './simulation.js?v=4';
+import { seededRandom, formatProbability } from './model.js?v=4';
 const $ = id => document.getElementById(id);
 const money = (v, digits=2) => `${v.toLocaleString('en-US',{maximumFractionDigits:digits})}b`;
 const pct = formatProbability;
@@ -9,7 +9,7 @@ const frame = (label,w,h) => `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label
 export class SimulationView {
   constructor(settings) {
     this.settings=settings; this.seed=2712026; this.singleTimer=null; this.manyTimer=null; this.valid=true;
-    this.runs=[]; this.experiments=[];
+    this.runs=[]; this.experiments=[]; this.allExperiments=[];
     $('watchOne').addEventListener('click',()=>this.watchOne());
     $('finishOne').addEventListener('click',()=>this.finishOne());
     $('simulate').addEventListener('click',()=>this.startMany());
@@ -18,15 +18,17 @@ export class SimulationView {
   }
   reset(valid=true) {
     clearTimeout(this.singleTimer); clearTimeout(this.manyTimer);
-    this.singleTimer=null; this.manyTimer=null; this.valid=valid; this.runs=[]; this.experiments=[];
+    this.singleTimer=null; this.manyTimer=null; this.valid=valid; this.runs=[]; this.experiments=[]; this.allExperiments=[];
     $('watchOne').disabled=!valid; $('simulate').disabled=!valid; $('finishOne').disabled=true; $('stopSimulation').disabled=!valid;
     $('runLanes').innerHTML='';
     $('runLog').textContent='Start the animation to watch the four automatically selected strategies.';
     $('experimentCount').textContent='0 / 50,000 per strategy'; $('experimentProgress').style.width='0%';
-    $('histogramChart').innerHTML=empty; $('runningMeanChart').innerHTML=empty; $('experimentTable').innerHTML='';
+    $('histogramChart').innerHTML=empty; $('runningMeanChart').innerHTML=empty; $('experimentTable').innerHTML=''; $('sampleMeanChart').innerHTML=empty;
+    $('sampleSummary').textContent=valid?'Running simulations to measure the average for every amount…':'Enter a valid price to simulate.';
     $('simulationResult').textContent=valid?'Preparing 50,000 upgrades for each strategy…':'Enter a valid price to simulate.';
     if(valid){
       const {analysis}=this.settings();
+      $('simulationScope').textContent=`${analysis.rules.maxStones} amounts × 50,000 upgrades = ${(analysis.rules.maxStones*50000).toLocaleString('en-US')} completed upgrades. Four representative distributions are shown below.`;
       $('simulationLegend').innerHTML=analysis.comparisons.map((s,i)=>`<span style="--key:${COLORS[i]}">${s.n} / attempt</span>`).join('');
       this.renderOne();
       // Like the Star Force calculator, results populate automatically after inputs settle.
@@ -65,13 +67,14 @@ export class SimulationView {
     clearTimeout(this.manyTimer);
     const {type,price,analysis}=this.settings();
     this.experimentSeed=++this.seed;
-    this.experiments=analysis.comparisons.map((s,i)=>new UpgradeExperiment(type,s.n,price,50000,this.experimentSeed+i));
-    $('histogramChart').innerHTML=empty;$('runningMeanChart').innerHTML=empty;$('experimentTable').innerHTML='';
+    this.allExperiments=analysis.strategies.map(s=>new UpgradeExperiment(type,s.n,price,50000,this.experimentSeed+s.n));
+    this.experiments=analysis.comparisons.map(s=>this.allExperiments[s.n-1]);
+    $('histogramChart').innerHTML=empty;$('runningMeanChart').innerHTML=empty;$('experimentTable').innerHTML='';$('sampleMeanChart').innerHTML=empty;
     $('stopSimulation').disabled=false;
     this.renderMany('Running');
     const step=()=>{
-      this.experiments.forEach(e=>e.advance(625));
-      const finished=this.experiments.every(e=>e.finished);
+      this.allExperiments.forEach(e=>e.advance(625));
+      const finished=this.allExperiments.every(e=>e.finished);
       this.renderMany(finished?'Finished':'Running');
       if(finished){this.manyTimer=null;$('stopSimulation').disabled=true;}
       else this.manyTimer=setTimeout(step,24);
@@ -81,19 +84,41 @@ export class SimulationView {
   stopMany() {
     clearTimeout(this.manyTimer);this.manyTimer=null;$('stopSimulation').disabled=true;
     if(this.experiments.length)this.renderMany('Stopped');
-    else $('simulationResult').textContent='Stopped before any upgrades. Use “Run simulations again” to begin.';
+    else { $('simulationResult').textContent='Stopped before any upgrades. Use “Run simulations again” to begin.'; $('sampleSummary').textContent='Simulation stopped before any upgrades were recorded.'; }
   }
   renderMany(status) {
     const count=this.experiments[0]?.completed||0;
     $('experimentCount').textContent=`${count.toLocaleString('en-US')} / 50,000 per strategy`;
     $('experimentProgress').style.width=`${count/500}%`;
-    $('simulationResult').textContent=`${status}${count?` ${count.toLocaleString('en-US')} upgrades per strategy`:' before any upgrades'}. Exact mean: ${money(this.settings().analysis.recommended.expectedCost)} for every strategy. Seed ${this.experimentSeed} (plus each series index).`;
-    if(!count)return;
-    $('experimentTable').innerHTML=this.experiments.map((e,i)=>`<tr class="${i===0?'guarantee':''}"><td>${e.batch}${i===0?' · recommended':''}</td><td>${money(e.mean)}</td><td>${money(e.quantile(.95))}</td><td>${money(e.quantile(.99))}</td><td>${pct(e.below/count)}</td><td>${pct(e.equal/count)}</td><td>${pct(e.above/count)}</td></tr>`).join('');
+    $('simulationResult').textContent=`${status}${count?` ${count.toLocaleString('en-US')} upgrades per strategy`:' before any upgrades'}. Exact mean: ${money(this.settings().analysis.recommended.expectedCost)} for every strategy. Seed ${this.experimentSeed} plus stones per attempt. All ${this.allExperiments.length} legal amounts simulated.`;
+    if(!count){ $('sampleSummary').textContent=`${status} before any upgrades were recorded.`; return; }
+    const bestSample=this.allExperiments.reduce((a,b)=>a.mean<=b.mean?a:b);
+    $('sampleSummary').textContent=`${status}: ${count.toLocaleString('en-US')} upgrades per amount. Lowest sampled average: ${bestSample.batch} stones at ${money(bestSample.mean,3)} (mean uncertainty ≈ ±${money(1.96*bestSample.standardError,3)}). Selecting the lowest of ${this.allExperiments.length} random samples favors lucky samples; it does not establish a lower true average.`;
+    $('experimentTable').innerHTML=this.allExperiments.map((e)=>`<tr class="${e.batch===this.allExperiments.length?'guarantee':''}"><td>${e.batch}${e.batch===this.allExperiments.length?' · no retry risk':''}</td><td>${money(e.mean,3)}</td><td>${money(e.mean-1.96*e.standardError,3)}–${money(e.mean+1.96*e.standardError,3)}</td><td>${money(e.quantile(.95))}</td><td>${money(e.quantile(.99))}</td><td>${pct(e.below/count)}</td><td>${pct(e.equal/count)}</td><td>${pct(e.above/count)}</td></tr>`).join('');
     this.drawCharts();
   }
   drawCharts() {
-    this.drawHistogram();this.drawMean();
+    this.drawHistogram();this.drawMean();this.drawAllMeans();
+  }
+  drawAllMeans() {
+    const W=Math.max(340,$('sampleMeanChart').clientWidth||900), H=300, left=72,right=24,top=23,bottom=48;
+    const G=this.settings().analysis.recommended.expectedCost, M=this.allExperiments.length;
+    const lo=Math.min(G*.995,...this.allExperiments.map(e=>e.mean-2.2*e.standardError));
+    const hi=Math.max(G*1.005,...this.allExperiments.map(e=>e.mean+2.2*e.standardError));
+    const X=n=>left+(n-1)/(M-1)*(W-left-right), Y=v=>H-bottom-(v-lo)/(hi-lo)*(H-top-bottom);
+    let svg=frame('Measured average cost and 95 percent sampling intervals for every legal batch size',W,H);
+    for(let i=0;i<=3;i++){
+      const v=lo+(hi-lo)*i/3;
+      svg+=`<line class="grid" x1="${left}" x2="${W-right}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${left-7}" y="${Y(v)+4}" text-anchor="end">${money(v,2)}</text>`;
+    }
+    svg+=`<line x1="${left}" x2="${W-right}" y1="${Y(G)}" y2="${Y(G)}" stroke="#74eed0" stroke-dasharray="5 4"><title>Exact mean: ${money(G)}</title></line>`;
+    for(const e of this.allExperiments){
+      const x=X(e.batch),y=Y(e.mean),a=Y(e.mean-1.96*e.standardError),b=Y(e.mean+1.96*e.standardError),color=e.batch===M?COLORS[0]:COLORS[2];
+      svg+=`<path d="M ${x} ${a} V ${b} M ${x-4} ${a} H ${x+4} M ${x-4} ${b} H ${x+4}" stroke="${color}" fill="none"/><circle cx="${x}" cy="${y}" r="4" fill="${color}" tabindex="0"><title>${e.batch} stones: measured mean ${money(e.mean,3)}; 95% mean interval ${money(e.mean-1.96*e.standardError,3)} to ${money(e.mean+1.96*e.standardError,3)}; ${e.completed} completed upgrades</title></circle>`;
+      if(W>600||e.batch===1||e.batch===M||e.batch===M/2)svg+=`<text x="${x}" y="${H-25}" text-anchor="middle">${e.batch}</text>`;
+    }
+    svg+=`<text x="${W/2}" y="${H-3}" text-anchor="middle">Stones per attempt · measured mean cost in b</text></svg>`;
+    $('sampleMeanChart').innerHTML=svg;
   }
   drawHistogram() {
     const W=Math.max(340,$('histogramChart').clientWidth||520),H=365,left=53,right=14,top=25,bottom=46;

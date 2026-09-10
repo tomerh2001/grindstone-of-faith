@@ -1,4 +1,4 @@
-import { strategy, seededRandom, validateBatch, rulesFor } from './model.js?v=3';
+import { strategy, seededRandom, validateBatch, rulesFor } from './model.js?v=4';
 
 export function rollAttempt(type, batch, random = Math.random) {
   validateBatch(type, batch);

@@ -10,7 +10,7 @@ async function boot() {
   const dom = new JSDOM(read('index.html'), { url: 'https://example.test/grindstone-of-faith/', runScripts: 'outside-only' });
   const w = dom.window;
   w.__model = model; w.__simulation = simulation;
-  w.fetch = async () => ({ ok: true, json: async () => JSON.parse(read('market.json')) });
+  w.fetch = async url => ({ ok: true, json: async () => JSON.parse(read(url.includes('independent-monte-carlo') ? 'independent-monte-carlo.json' : 'market.json')) });
   const timers = new Map(); let timerId = 0;
   w.setTimeout = fn => { const id = ++timerId; timers.set(id, fn); return id; };
   w.clearTimeout = id => timers.delete(id);
@@ -28,10 +28,10 @@ test('only type and price are inputs; both types automatically recommend the gua
   const {dom,$,input,w}=await boot();
   try{
     assert.deepEqual([...w.document.querySelectorAll('#calculator input,#calculator select')].map(e=>e.id),['type','price']);
-    assert.equal($('bestAverage').textContent,'260b');assert.match($('averageVerdict').textContent,/Use 20 Faith/);
+    assert.equal($('bestAverage').textContent,'260b');assert.match($('averageVerdict').textContent,/All 1–20 amounts tie on average/);
     assert.equal($('strategyTable').children.length,20);assert.match($('tieExplanation').textContent,/All amounts from 1 to 20 tie/);
     input('price',14);assert.equal($('bestAverage').textContent,'300b');
-    input('type','life');assert.match($('averageVerdict').textContent,/Use 10 Life/);
+    input('type','life');assert.match($('averageVerdict').textContent,/All 1–10 amounts tie on average/);
     assert.equal($('price').value,'14');assert.equal($('bestAverage').textContent,'145b');
     assert.match($('priceNote').textContent,/no Life market sample/);assert.equal($('strategyTable').children.length,10);
     assert.match($('feeNote').textContent,/0.5b/);assert.match($('feeNote').textContent,/4 → 5/);
@@ -75,13 +75,23 @@ test('automatic Monte Carlo fills all comparisons, stops, restarts and clears ol
     $('stopSimulation').click();const count=$('experimentCount').textContent;flush();assert.equal($('experimentCount').textContent,count);
     assert.match($('simulationResult').textContent,/Stopped/);
     $('simulate').click();flush();assert.equal($('experimentCount').textContent,'50,000 / 50,000 per strategy');
-    assert.equal($('experimentTable').children.length,4);assert.match($('experimentTable').children[0].textContent,/260b260b260b0%100%0%/);
+    assert.equal($('experimentTable').children.length,20);assert.match($('experimentTable').children[19].textContent,/260b260b–260b260b260b0%100%0%/);
+    assert.equal($('sampleMeanChart').querySelectorAll('circle').length,20);
+    assert.match($('sampleSummary').textContent,/Lowest sampled average/);
+    assert.equal($('auditTable').children.length,30);
+    assert.match($('auditFinding').textContent,/30,000,000.*101,273,266/);
+    assert.match($('auditTable').children[18].textContent,/259.996b/);
     input('type','life');input('price',2);assert.equal($('experimentTable').children.length,0);
     assert.equal($('histogramChart').querySelector('svg'),null);flush();
-    assert.match($('experimentTable').children[0].textContent,/10 · recommended25b25b25b0%100%0%/);
+    assert.equal($('experimentTable').children.length,10);
+    assert.match($('experimentTable').children[9].textContent,/10 · no retry risk25b25b–25b25b25b0%100%0%/);
+    assert.equal($('sampleMeanChart').querySelectorAll('circle').length,10);
+    assert.match($('riskAlternative').textContent,/90% finish for 22.5b.*10% spend at least 45b/);
+    assert.match($('auditTable').children[18].textContent,/259.996b/);
     assert.match($('simulationResult').textContent,/Exact mean: 25b/);
     $('simulate').click();$('stopSimulation').click();assert.equal($('experimentTable').children.length,0);
     assert.equal($('histogramChart').querySelector('svg'),null);assert.match($('simulationResult').textContent,/Stopped before any/);
+    assert.equal($('sampleMeanChart').querySelector('svg'),null);assert.match($('sampleSummary').textContent,/Stopped before any/);
     for(const path of w.document.querySelectorAll('svg path'))assert.ok(!/NaN|undefined|Infinity/.test(path.getAttribute('d')));
     w.document.querySelector('[data-market="history"]').click();assert.equal($('marketTable').children.length,36);
     w.document.querySelector('[data-market="active"]').click();assert.equal($('marketTable').children.length,18);

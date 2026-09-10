@@ -2,7 +2,7 @@
   "status": "passed",
   "method": "Tracked jsdom interface tests, pure model and simulation tests, independent fraction comparison",
   "test_command": "npm test && python3 research/statistics-verification.py",
-  "tests": 22,
+  "tests": 23,
   "production_strategies_verified": 30,
   "simulated_upgrades_in_all_strategy_validation": 3000000,
   "coverage": [
@@ -18,7 +18,14 @@
     "stop and immediate stop after restart clear stale charts",
     "Life switch never relabels Faith market evidence",
     "market tabs, 54 rows and exact finite supply cost",
-    "probability formatting preserves mathematical uncertainty"
+    "probability formatting preserves mathematical uncertainty",
+    "observed mean and mean interval for every legal amount",
+    "sample minimum explicitly distinguished from true expectation",
+    "independent audit rows remain at recorded scenario prices",
+    "near-guarantee cheaper-outcome and retry tradeoff",
+    "independent raw count, mean, percentile, seed and script hash integrity"
   ],
-  "visual_review": "No browser screenshot review performed; layout uses responsive CSS and scalable SVG. Interface behavior verified in jsdom."
+  "visual_review": "No browser screenshot review performed; layout uses responsive CSS and scalable SVG. Interface behavior verified in jsdom.",
+  "independent_completed_upgrades": 30000000,
+  "independent_rng_draws": 101273266
 }

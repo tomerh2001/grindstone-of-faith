@@ -155,11 +155,23 @@ For price sensitivity under the new rules, a guaranteed attempt costs 202b at 9.
 
 With fixed nondecreasing marginal prices, buying beyond the cheap listings makes retries more expensive. Under the stated repeated-attempt model, expected stone consumption remains 20, and a convex cumulative acquisition-cost function G gives E[G(S)]≥G(20). A 20-stone attempt can then improve expected meso cost too. The finite screenshots cannot support an unbounded retry expectation without an explicit assumption about later supply, so the site keeps its flat-price retry scenarios separate from the visible supply ladder.
 
+## Independent Monte Carlo audit
+
+A second implementation, importing no website code and using Python's random.Random generator, completed **30,000,000 upgrades with 101,273,266 random attempt rolls**. It tested one million completions for every legal Faith and Life amount. Seeds were fixed beforehand; every failed attempt was charged, with no budget cap or discarded tail. Faith used 12b per stone, Life an illustrative 2b. [Full audit](./independent-monte-carlo.md), [recorded counts and results](./independent-monte-carlo.json), [CSV](./independent-monte-carlo.csv).
+
+Observed Faith averages were 259.976951b for 1 stone, 260.385450b for 5, 259.938900b for 10, 259.996152b for 19 and exactly 260b for 20. The 19-stone strategy finished below 260b in 94.9949% of runs, with 5.0051% costing more. This supports the distinction between a frequent cheap outcome and a lower average.
+
+The lowest sampled Faith mean was 3 stones at 259.510719b. Picking the minimum among many simulated estimates biases the apparent winner downward. Two of the 28 stochastic strategies had pointwise 95% mean intervals that missed the theoretical mean; they were retained. A pointwise 95% interval is not simultaneous coverage across every strategy. The exact mean identity establishes the tie; simulation independently checks its implementation under the stated rules.
+
+The recommendation is a choice to remove risk, not a claim that 100% uniquely minimizes the average. The updated opening says all amounts tie and presents the maximum-minus-one alternative's frequent saving and occasional larger bill. Its sampled averages are visible near the top, with data for every amount below.
+
+Nexon's rendered v271 notes were rechecked in this audit and still specify the same Life/Faith caps, per-stone rates and linear fees. Simulations are synthetic probability trials, not observations of game-server attempts. They cannot independently establish Nexon's actual RNG behavior or undocumented failure mechanics.
+
 ## Verification and scope limits
 
 The JavaScript model is checked against independent fraction arithmetic for all 30 legal Life and Faith strategies: means, standard deviations, median/P90/P95/P99, and success within the guaranteed total. Three million seeded completions across all 30 amounts agree with exact means within six Monte Carlo standard errors and with exact budget success rates.
 
-The page automatically simulates 50,000 completed upgrades for each of four amounts: full maximum, one fewer, half maximum and one stone. Histograms retain all tail outcomes; running-average checkpoints preserve trial order. Exact calculations establish the mean tie and recommendation. Simulated sample means never choose the strategy. A separate four-lane animation shows attempts until success; changing type or price cancels old runs and restarts the comparison. The only calculator inputs are stone type and price.
+The page automatically simulates 50,000 completed upgrades for every legal amount: 1,000,000 upgrades for Faith or 500,000 for Life. A measured-mean chart and pointwise 95% sampling intervals expose every result. Four amounts (maximum, one fewer, half maximum, one stone) are also shown in the distribution and running-mean charts. Histograms retain all tail outcomes; running-average checkpoints preserve trial order. Exact calculations establish the mean tie and recommendation. Simulated sample means never choose the strategy. A separate four-lane animation shows attempts until success; changing type or price cancels old runs and restarts the comparison. The only calculator inputs are stone type and price.
 
 Discrete sample percentiles need care at exact probability boundaries. At Faith 19, the true first-attempt CDF is exactly 95%. In a finite random sample, fewer than 95% may succeed immediately, moving the empirical P95 to a second attempt even though the exact P95 is one attempt. Life 9 has the analogous P99 boundary after two tries. The page explains this difference beside its simulated table.
 
@@ -181,8 +193,10 @@ For visual simulations, record running-average checkpoints in original trial ord
 
 For calculators with an exact mean tie, select a policy using an explicit risk criterion, rather than asking the user to choose the optimization variable. When introducing a new item type, parameterize caps, fees, probabilities, upgrade levels and simulation accounting together. Keep market observations attached to their original item type. In a discrete distribution, empirical quantiles need not converge smoothly at a probability boundary; explain whole-attempt jumps rather than hiding them. Version every changed browser module import when deploying an incompatible interface update.
 
+When a user challenges a simulation-backed conclusion, expose observed results, seeds and sample counts rather than repeating the analytical answer. Independently implement the experiment with a different RNG and retain outliers. Explain the difference between the lowest sampled mean, the lowest true expectation, and a risk-based recommendation. Synthetic trials validate a stated model; they do not independently establish the game's rules.
+
 ## Session record
 
 Verified released mechanics against rendered primary sources; transcribed six screenshots; derived and independently checked fixed and adaptive strategies; implemented a static calculator with charts and simulation; configured GitHub Actions to validate and publish the site. No earlier research journal was superseded.
 
-The current revision follows the Star Force calculator’s inputs → automatic policy → result tiles → visual comparisons structure. Type and price are the only calculator inputs. All legal amounts are evaluated automatically; exact mean and P95 curves, probability tables, four-lane animation, and automatic Monte Carlo explain the recommendation. Tests cover both types, invalid input hiding, cancellation, automatic restart, and unchanged Faith market evidence.
+The current revision follows the Star Force calculator’s inputs → automatic policy → result tiles → visual comparisons structure. Type and price are the only calculator inputs. All legal amounts are evaluated automatically; exact mean and P95 curves, probability tables, four-lane animation, and automatic Monte Carlo explain the recommendation. Tests cover both types, invalid input hiding, cancellation, automatic restart, all-amount simulated means and sampling intervals, unchanged Faith market evidence, and integrity of the independent audit records.

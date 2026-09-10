@@ -135,5 +135,12 @@
       "support": "direct"
     }
   ],
-  "snapshot_note": "Full publisher-page captures are retained as private research evidence, not distributed in this repository."
+  "snapshot_note": "Full publisher-page captures are retained as private research evidence, not distributed in this repository.",
+  "current_rule_recheck": {
+    "checked_at_utc": "2026-09-10T10:43:25.383138+00:00",
+    "source": "nexon-v271",
+    "method": "Playwright rendered primary page",
+    "snapshot_sha256": "73ecf4fe58eb3d9f7268536d7545376613e172f010ad211f9c728b0be693369c",
+    "result": "Life max10 +10pp each fee0.5b each; Faith max20 +5pp each fee1b each; unchanged"
+  }
 }
