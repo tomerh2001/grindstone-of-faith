@@ -8,6 +8,6 @@
     "check": "node --check site/app.js && node --check site/model.js && node --check site/simulation.js && node --check site/simulation-view.js"
   },
   "devDependencies": {
-    "jsdom": "26.1.0"
+    "jsdom": "30.0.1"
   }
 }
